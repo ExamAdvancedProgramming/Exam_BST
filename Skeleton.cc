@@ -29,12 +29,43 @@ class BST {
   void erase();
   
   class Iterator;
-  Iterator begin() { return Iterator{nullptr}; } //ritornare la chiave più piccola  
-  Iterator end() { return Iterator{nullptr}; }
+  
+  Iterator begin() { 
+  
+  Node* first_key = root.get();
+  while(first_key -> left.get()){
+  first_key = first_key -> left.get();
+  };
+  std::cout <<"sono qui "<< first_key -> key <<std::endl;
+  return Iterator{first_key};
+  } 
+  
+  Iterator end() { 
+  Node* last_key = root.get();
+  while(last_key -> right.get()){
+  last_key = last_key -> right.get();
+  };
+  std::cout <<"sono qui "<< last_key -> key <<std::endl;
+  return Iterator{last_key};
+   }
 
   class ConstIterator;
-  ConstIterator cbegin() const { return ConstIterator{nullptr}; }
-  ConstIterator cend() const { return ConstIterator{nullptr}; }
+  ConstIterator cbegin() const { 
+  Node* first_key = root.get();
+  while(first_key -> left.get()){
+  first_key = first_key -> left.get();
+  };
+  std::cout <<"sono qui "<< first_key -> key <<std::endl;
+  return ConstIterator{first_key}; }
+  
+  ConstIterator cend() const {
+  Node* last_key = root.get();
+  while(last_key -> right.get()){
+  last_key = last_key -> right.get();
+  };
+  std::cout <<"sono qui "<< last_key -> key <<std::endl;
+  return ConstIterator{last_key};
+   }
   
   Iterator find(key_type& k){
     //ritorna un iterator a nodo con quella key, altrimenti torna end()
@@ -50,6 +81,7 @@ class BST {
 };
 
 template < typename key_type, typename value_type>
+
 class BST<key_type, value_type>::Iterator {
   using Node = BST<key_type, value_type>::Node;
   Node* current;
@@ -137,42 +169,6 @@ void BST<key_type,value_type> ::insert(const key_type k, const value_type v){
     return;
     };
     
-/*if (root.get() == nullptr){
-    std::cout << "sono nullo" << std::endl;
-    root.reset(new Node{k,v});
-    return; }
-else { std::cout << "non sono nullo" << std::endl; 
-std::cout << k << " " << curr -> key << std::endl;
-
-/// questo forse e' meglio esterno....
-    if (k == curr -> key && v == curr -> value){
-    std::cout << "This node already exists!" << std::endl;
-    }
-    else if ( k == curr -> key){
-    curr -> value = v;
-    std::cout << "Key overwritten!" << std::endl;
-    };
-    
-    
-    bool control = true;
-    while (control){
-    while(k < curr -> key){
-    std::cout << "non dovrei entrare qui dentro" << std::endl;
-    curr = curr -> left.get();
-    };
-    if (curr -> right.get() != nullptr){
-    curr = curr -> right.get(); }
-    else{
- control = false;};
-    };
-    
-    // forse è meglio se fai una funzione esterna...
-    
-};
-//else if (k > curr -> key){
-//curr = curr ->right.get();};    
-*/
-
 
 
 int main() {
@@ -185,6 +181,10 @@ int main() {
   Tree.insert(1,1);
   Tree.insert(5,2);
   Tree.insert(6,2);
+  BST<int, int>::Iterator first = Tree.begin();
+  BST<int, int>::Iterator last = Tree.end();
+  BST<int, int>::ConstIterator cfirst = Tree.cbegin();
+  BST<int, int>::ConstIterator clast = Tree.cend();
   std::cout << "funziona lo scheletro" << std::endl;
   };
 
