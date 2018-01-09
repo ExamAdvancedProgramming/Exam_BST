@@ -14,10 +14,13 @@ class BST {
   std::unique_ptr<Node> left;
   std::unique_ptr<Node> right;
   std::unique_ptr<Node> parent;
-  Node(const key_type  k, const value_type  v, Node* p = nullptr) : value{v}, key{k}, parent{p}, left{nullptr}, right{nullptr} {}
+  Node(const key_type  k, const value_type  v, Node * p = nullptr)  : value{v}, key{k}, parent{p}, left{nullptr}, right{nullptr} { }
+  
+ 
   };
   
   std::unique_ptr<Node> root;
+  
   
   
   public:
@@ -28,18 +31,28 @@ class BST {
   void balance();
   void erase();
   
+   Node* operator=(const Node* m) {
+    if (m != this) {
+        this -> left = m -> left;
+        this -> right = m -> right;
+        this -> parent = m -> parent;
+        this -> key = m -> key;
+        this -> value = m-> value;
+        
+      }
+    
+    return *this;
+    }
+  
   class Iterator;
   
-  Iterator begin() { 
-  
-  Node* first_key = root.get();
+  Iterator begin() {Node* first_key = root.get();
   while(first_key -> left.get()){
   first_key = first_key -> left.get();
   };
   std::cout <<"sono qui "<< first_key -> key <<std::endl;
   return Iterator{first_key};
-  } 
-  
+  }
   Iterator end() { 
   Node* last_key = root.get();
   while(last_key -> right.get()){
@@ -92,7 +105,24 @@ class BST<key_type, value_type>::Iterator {
 
   // ++it
   Iterator& operator++() {
-    current = current->right.get();
+    if (current == root.get())          //RADICE
+    { current = current -> right.get();
+    while(current -> left.get()){
+    current = current.left();
+    }
+    }
+    if(current -> key < root -> key){
+    if (current -> right.get() = nullptr){
+    current = current -> parent.get();
+    }
+    else{
+    current = current -> right.get();
+    while(current -> left.get()){
+    current = current.left();
+    }
+    }
+    }
+    //current = current->right.get();
     return *this;
   }
 
@@ -119,19 +149,33 @@ class BST<key_type,value_type> ::ConstIterator : public BST<key_type,value_type>
   using parent::Iterator;
 };
 
+/*
 template < typename key_type, typename value_type>
-void BST<key_type,value_type> ::insert(const key_type k, const value_type v){
-     Node* temp {nullptr};
+ Iterator<key_type,value_type>::begin(){ 
+  
+  Node* first_key = root.get();
+  while(first_key -> left.get()){
+  first_key = first_key -> left.get();
+  };
+  std::cout <<"sono qui "<< first_key -> key <<std::endl;
+  return Iterator{first_key};
+  } 
+*/
+
+template < typename key_type, typename value_type>
+void BST<key_type,value_type>::insert(const key_type k, const value_type v){
+    Node* temp {nullptr};
     if (root == nullptr){
     std::cout << "sono nullo" << std::endl;
     root.reset(new Node{k,v});
+    root -> parent.reset(nullptr);
     return; 
     }
     else {
     std::cout << "non sono nullo" << std::endl;
     Node* next = root.get(); 
     while(next){
-    std::cout << next -> key << std::endl;
+    //std::cout << next -> key << std::endl;
     //temp -> parent = std::move(temp);
     if(k < next -> key){
     std::cout << "left!" << std::endl;
@@ -160,15 +204,38 @@ void BST<key_type,value_type> ::insert(const key_type k, const value_type v){
     if (k < temp -> key){
     std::cout << "NUOVO NODO SINISTRA" << std::endl;
     temp -> left.reset(new Node{k,v});
+    temp -> left -> parent.reset(new Node{temp -> key, temp -> value});
+    std::cout << temp -> left -> parent -> key << " " << temp -> key  << std::endl;
+    if(temp -> parent != nullptr){
+    std::cout << "SONO TUO PADRE!" << std::endl;}
     }
     
     else{
     std::cout << "NUOVO NODO DESTRA" << std::endl;
     temp -> right.reset(new Node{k,v});
-    } 
-    return;
+    temp -> right -> parent.reset(new Node{temp -> key, temp -> value});
+    std::cout << temp -> right -> parent -> key << " " << temp -> key  << std::endl;
+     if(temp -> parent != nullptr){
+    std::cout << "SONO TUO PADRE!" << std::endl;}
+    }
     };
     
+    
+    
+
+/*
+template < typename key_type, typename value_type>
+Node* BST<key_type,value_type>::find_first (Node * root){
+
+Node* first_key = root.get();
+  while(first_key -> left.get()){
+  first_key = first_key -> left.get();
+  };
+  std::cout <<"sono qui "<< first_key -> key <<std::endl;
+  return first_key;
+
+}
+  */  
 
 
 int main() {
