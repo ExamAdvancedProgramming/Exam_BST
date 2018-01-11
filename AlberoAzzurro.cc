@@ -20,7 +20,7 @@ class Tree {
             std::unique_ptr<node> right;
             std::unique_ptr<node> left;
 
-            node(key_type node_key, value_type value): key{node_key}, data{value}, right{nullptr}, left{nullptr} {}
+            node(key_type node_key, value_type node_value, node* r = nullptr, node* l = nullptr): key{node_key}, data{node_value}, right{r}, left{l} {}
         };
         
 
