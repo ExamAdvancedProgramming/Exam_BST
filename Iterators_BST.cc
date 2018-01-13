@@ -8,7 +8,8 @@ class BST<key_type, value_type>::Iterator {
 
     public:
         Iterator(Node* n, Node* r) : current{n}, _root{r} {};
-        value_type& operator*() const { return current->key; }
+        value_type& operator*() const { return current->value; }
+        key_type& operator!() const { return current->key; }
 
   // ++iterator definition
   

@@ -52,9 +52,9 @@ void BST<key_type, value_type>::print() const {
     auto it_end{this->cend()};
   
     for (; it != ++it_end; ++it){
-        std::cout << *it << " ";
+        std::cout << "["<< !it << " : "<< *it << "]; ";
         }
-    std::cout << *it_end << std::endl;
+    std::cout << "["<< !it_end << " : " << *it_end << "]. "<< std::endl;
     }
     
  }
