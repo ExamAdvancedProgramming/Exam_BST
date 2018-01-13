@@ -9,12 +9,16 @@ class BST {
   
   private:
     struct Node {
-        value_type value;
+        
         key_type key;
+        value_type value;
+        
+        Node* parent;
+        
         std::unique_ptr<Node> left;
         std::unique_ptr<Node> right;
-        Node* parent;
-        Node(const key_type  k, const value_type  v, Node* p = nullptr) : value{v}, key{k}, parent{p}, left{nullptr}, right{nullptr} {}
+        
+        Node(const key_type  k, const value_type  v, Node* p = nullptr) : key{k}, value{v}, parent{p}, left{nullptr}, right{nullptr} {}
     };
   
     std::unique_ptr<Node> root;
