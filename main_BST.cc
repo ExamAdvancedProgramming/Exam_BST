@@ -12,6 +12,7 @@
 int main() {
     
     BST<int, int> Tree{};
+    Tree.print();           //expected empty
     Tree.insert(8,2);
     Tree.insert(5,2);
     Tree.insert(3,3);
@@ -27,6 +28,8 @@ int main() {
     Tree.insert(30,2);
     Tree.insert(16,2);
     Tree.print();
+    Tree.clear();
+    Tree.print();           //expected empty
     std::cout << "funziona lo scheletro" << std::endl;
     
     };

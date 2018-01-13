@@ -25,7 +25,7 @@ class BST {
     ~ BST (){}
     void insert (const key_type  k, const value_type  v);
     void print() const;
-    void clear() const;
+    void clear();
     void balance();
     void erase();
   

@@ -44,12 +44,30 @@ void BST<key_type,value_type>::insert(const key_type k, const value_type v){
 template <typename key_type, typename value_type>
 void BST<key_type, value_type>::print() const {
   
-  auto it {this->cbegin()};
-  auto it_end{this->cend()};
+  if (!root){
+    std::cout << "The Tree is empty!" << std::endl; 
+  }
+  else{
+    auto it {this->cbegin()};
+    auto it_end{this->cend()};
   
-  for (; it != ++it_end; ++it){
-    std::cout << *it << " ";}
+    for (; it != ++it_end; ++it){
+        std::cout << *it << " ";
+        }
     std::cout << *it_end << std::endl;
-    }   
+    }
+    
+ }
+ 
+template <typename key_type, typename value_type>
+void BST<key_type, value_type>::clear() {
+    
+    if(root){
+       
+       root.reset();
+    
+    }
+    
+}      
     
 
