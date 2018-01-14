@@ -50,6 +50,27 @@ class BST {
         };
         return Iterator{last_key, root.get()};
         }
+        
+    Iterator find(key_type key) const{
+    auto it {this -> cbegin()};
+    auto it_end {this -> cend()};
+    for (; it != it_end; ++it){
+        key_type comp = !it;
+        if (comp == key ){
+            std::cout << !it << std::endl;
+            return it;
+            }
+        }
+    key_type comp = !it_end;    
+    if ( comp == key ){
+            std::cout << !it_end << std::endl;
+            return it_end;
+            }
+    else{
+    std::cout << "Key not found!" << std::endl;
+        return Iterator{nullptr, root.get()};  //returns a null pointer and not cend()
+    }
+    }
 
     class ConstIterator;
     
@@ -68,11 +89,6 @@ class BST {
         return ConstIterator{last_key, root.get()};
         }
   
-  //FIND?? DOBBIAMO FARLO PER L'ESAME??
-  
-    Iterator find(key_type& k){
-    //ritorna un iterator a nodo con quella key, altrimenti torna end()
-    };
   
     value_type& operator[](key_type const &k) const {
     //ritorna una reference al valore relativo alla key

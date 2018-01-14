@@ -22,6 +22,10 @@ class BST {
     std::unique_ptr<Node> root;
   
   public:
+  
+  
+  class Iterator;
+  
   BST() : root{nullptr} {};
    ~ BST (){}
   void insert (const key_type  k, const value_type  v);
@@ -30,6 +34,10 @@ class BST {
   void balance();
   void erase();
   
+  
+ 
+  
+  }
    /*std::unique_ptr<Node> operator=(const Node* m) {
     if (m != this) {
         this -> left = m -> left;
@@ -44,7 +52,7 @@ class BST {
     }
     */
   
-  class Iterator;
+
   
  
   

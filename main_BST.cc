@@ -28,6 +28,10 @@ int main() {
     Tree.insert(20,19);
     Tree.insert(30,29);
     Tree.insert(16,15);
+    auto find1 = Tree.find(16);
+    auto find2 = Tree.find(30); 
+    Tree.find(55);
+    std::cout << "Found the keys " << !find1 << "and " << !find2 << std::endl;
     Tree.print();
     Tree.clear();
     Tree.print();           //expected empty
