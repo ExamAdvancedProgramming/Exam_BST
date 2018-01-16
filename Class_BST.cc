@@ -36,59 +36,50 @@ class BST {
     class Iterator;
   
     Iterator begin() {
+        
         Node* first_key = root.get();
+        
         while(first_key -> left.get()){
             first_key = first_key -> left.get();
         };
-        return Iterator{first_key, root.get()};
+        
+        return Iterator{first_key};
     }
   
-    Iterator end() { 
-        Node* last_key = root.get();
-        while(last_key -> right.get()){
-            last_key = last_key -> right.get();
-        };
-        return Iterator{last_key, root.get()};
-        }
+    Iterator end() { return Iterator{nullptr};} 
+        
         
     Iterator find(key_type key) const{
-    auto it {this -> cbegin()};
-    auto it_end {this -> cend()};
-    for (; it != it_end; ++it){
-        key_type comp = !it;
-        if (comp == key ){
-            std::cout << !it << std::endl;
-            return it;
+        auto it {this -> cbegin()};
+        auto it_end {this -> cend()};
+        
+        for (; it != it_end; ++it){
+            key_type comp = (*it).first;
+            if (comp == key ){
+                return it;
+                }
             }
+        std::cout << "The key " << key << " is not in the tree..." << std::endl;
+        return it_end;
         }
-    key_type comp = !it_end;    
-    if ( comp == key ){
-            std::cout << !it_end << std::endl;
-            return it_end;
-            }
-    else{
-    std::cout << "Key not found!" << std::endl;
-        return Iterator{nullptr, root.get()};  //returns a null pointer and not cend()
-    }
-    }
+        
 
     class ConstIterator;
     
     ConstIterator cbegin() const { 
+        
         Node* first_key = root.get();
+        
         while(first_key -> left.get()){
             first_key = first_key -> left.get();
         };
-        return ConstIterator{first_key, root.get()}; }
-  
-    ConstIterator cend() const {
-        Node* last_key = root.get();
-        while(last_key -> right.get()){
-            last_key = last_key -> right.get();
-        };
-        return ConstIterator{last_key, root.get()};
+        
+        return ConstIterator{first_key}; 
+        
         }
   
+    ConstIterator cend() const { return ConstIterator{nullptr}; }
+       
   
     value_type& operator[](key_type const &k) const {
     //ritorna una reference al valore relativo alla key

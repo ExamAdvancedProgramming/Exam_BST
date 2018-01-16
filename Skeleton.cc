@@ -37,7 +37,6 @@ class BST {
   
  
   
-  }
    /*std::unique_ptr<Node> operator=(const Node* m) {
     if (m != this) {
         this -> left = m -> left;
@@ -62,16 +61,16 @@ class BST {
   while(first_key -> left.get()){
   first_key = first_key -> left.get();
   };
-  std::cout <<"sono qui "<< first_key -> key <<std::endl;
-  return Iterator{first_key, root.get()};
+  //std::cout <<"sono qui "<< first_key -> key <<std::endl;
+  return Iterator{first_key};
   }
   Iterator end() { 
-  Node* last_key = root.get();
-  while(last_key -> right.get()){
-  last_key = last_key -> right.get();
-  };
-  std::cout <<"sono qui "<< last_key -> key <<std::endl;
-  return Iterator{last_key, root.get()};
+  //Node* last_key = root.get();
+  //while(last_key -> right.get()){
+  //last_key = last_key -> right.get();
+  //};
+  //std::cout <<"sono qui "<< last_key -> key <<std::endl;
+  return Iterator{nullptr};
    }
 
   class ConstIterator;
@@ -80,16 +79,16 @@ class BST {
   while(first_key -> left.get()){
   first_key = first_key -> left.get();
   };
-  std::cout <<"sono qui "<< first_key -> key <<std::endl;
-  return ConstIterator{first_key, root.get()}; }
+  std::cout <<"sono iniziale "<< first_key -> key <<std::endl;
+  return ConstIterator{first_key}; }
   
   ConstIterator cend() const {
-  Node* last_key = root.get();
-  while(last_key -> right.get()){
-  last_key = last_key -> right.get();
-  };
-  std::cout <<"sono qui "<< last_key -> key <<std::endl;
-  return ConstIterator{last_key, root.get()};
+  //Node* last_key = root.get();
+  //while(last_key -> right.get()){
+  //last_key = last_key -> right.get();
+  //};
+  //std::cout <<"Sono it finale "<< last_key -> key <<std::endl;
+  return ConstIterator{nullptr};
    }
   
   Iterator find(key_type& k){
@@ -110,38 +109,125 @@ template < typename key_type, typename value_type>
 class BST<key_type, value_type>::Iterator  {
   using Node = BST<key_type, value_type>::Node;
   Node* current;
-  Node* _root;
+  //Node* _root;
 
  public:
-  Iterator(Node* n, Node* root) : current{n}, _root{root} {};
-  value_type& operator*() const { return current->key; } /// VALUEEEE
+  Iterator(Node* n) : current{n} {};
+  std::pair<key_type, value_type> operator*() const { return std::make_pair(current -> key, current -> value); }
+
 
   // ++it
   Iterator& operator++() {
-    Node* last = _root;
-    while(last -> right){
+    if(current -> right.get() != nullptr){
+            std::cout << "Ma ci passo qui3?" << std::endl;
+            current = current -> right.get();
+            while(current -> left.get()){
+                current = current -> left.get();
+                }
+                }
+    else{
+    current = current -> parent;
+    }
+            
+        //std::cout << "SONO CURRENT " << current -> key << std::endl; 
+        //Node* last = _root;
+        //while(last -> right){
+          //  last = last -> right.get();
+           // }
+        //if (current == last){
+          //  std::cout << "Ma ci passo qui5?" << std::endl;
+           // return *this;
+        //}
+        /*
+        if(current -> right.get() == nullptr && current -> parent -> right.get() == current){
+            Node* temp = current;
+           while(temp -> parent != nullptr){
+            if (temp -> parent -> right.get() == temp){ 
+               std::cout << "SONO 4 " << current -> key << std::endl;
+              temp = temp -> parent; 
+           }
+           else{
+           break;
+           }
+           }
+           if (temp -> parent == nullptr){
+            std::cout << "Ma ci passo qui1?" << std::endl;
+            current = nullptr;//current -> parent -> parent;
+            }
+            else{
+            current = current -> parent -> parent;
+            }
+            }
+        else if(current -> right.get() == nullptr && current -> parent -> left.get() == current){ 
+            std::cout << "Ma ci passo qui2?" << std::endl;
+            current = current -> parent;
+            }
+        else if(current -> right.get() != nullptr){
+            std::cout << "Ma ci passo qui3?" << std::endl;
+            current = current -> right.get();
+            while(current -> left.get()){
+                current = current -> left.get();
+                }
+            }
+        //else if(current == nullptr){
+        //std::cout << "Ma ci passo qui4?" << std::endl;
+          //  Iterator IT = Iterator {nullptr, _root};
+           // return IT;
+        //}
+         */   
+        return *this;
+        }
+    //Node* last = current;
+    //Node* last = _root;
+    /*while(last -> right){
     last = last -> right.get();
     }
     if (current == last){
     //std::cout << "ci passo" << std::endl;
     return *this;
     }
-    else if(current -> right.get() == nullptr && current -> parent -> right.get() == current){
-    current = current -> parent -> parent;
+    */
+    //std::cout << "SONO QUI 1 " << current -> key << std::endl;
+    
+    /*
+    
+    if(current -> right.get() == nullptr && current -> parent -> right.get() == current){
+    
+        while(last -> parent != nullptr){
+            if (last -> parent -> parent -> right.get() == current -> parent){ 
+      //          std::cout << "SONO QUI 2 " << current -> key << std::endl;
+                last = last -> parent; 
+            }
+            else{
+                std::cout << "SONO QUI 3 " << current -> key << std::endl;
+                //break;//last -> parent = nullptr;
+            }
+            break;
+       }
+        if (last -> parent  == nullptr){
+            std::cout << "SONO ULTIMO" << std::endl;
+            //return ;
+            }
+        else{   
+        current = current -> parent -> parent;
+        }    
     }
     else if(current -> right.get() == nullptr && current -> parent -> left.get() == current){ 
+    std::cout << "SONO QUI CASPITA: dx null e sono figlio sinitro" << current -> key << std::endl;
     current = current -> parent;
+    
     }
     else if(current -> right.get() != nullptr){
+    std::cout << "SONO QUI 4" << std::endl;
     current = current -> right.get();
     while(current -> left.get()){
     current = current -> left.get();
     }
-    }
-   
+    
+    }*/
+   //return *this;
     //current = current->right.get();
-    return *this;
-  }
+    
 
   // it++
   Iterator operator++(value_type ) {
@@ -221,13 +307,13 @@ void BST<key_type,value_type>::insert(const key_type k, const value_type v){
     if (k < temp -> key){
     std::cout << "NUOVO NODO SINISTRA" << std::endl;
     temp -> left.reset(new Node{k,v, temp});
-   std::cout << temp -> left -> parent -> key << " " << temp -> key << std::endl;
+   //std::cout << temp -> left -> parent -> key << " " << temp -> key << std::endl;
     }
     
     else{
     std::cout << "NUOVO NODO DESTRA" << std::endl;
-    temp -> right.reset(new Node{k,v, temp});
-    std::cout << temp -> right -> parent -> key << " " << temp -> key << std::endl;
+    temp -> right.reset(new Node{k,v, temp -> parent});
+    //std::cout << temp -> right -> parent -> key << " " << temp -> key << std::endl;
     } 
     return;
     };
@@ -237,13 +323,24 @@ void BST<key_type,value_type>::insert(const key_type k, const value_type v){
 template <typename key_type, typename value_type>
 void BST<key_type, value_type>::print() const {
 
-
-  auto it {this->cbegin()};
-  auto it_end{this->cend()};
-  for (; it != ++it_end; ++it){
-    std::cout << *it << " ";}
-    std::cout << *it_end << std::endl;
-}   
+    std::cout << "HO INIZIATO A PRINTARE" << std::endl;
+  if (!root){
+    std::cout << "The Tree is empty!" << std::endl; 
+  }
+  else{
+    auto it {this->cbegin()};
+    auto it_end{this->cend()};
+    //auto it_end2 = ++this->cbegin();
+    for (; it != it_end; ++it){
+        //std::cout << (*it).first << std::endl;
+        //return;
+        //std::cout << "STOCAZZO" << std::endl;
+        std::cout << "[" << (*it).first << " : " << (*it).second << "]," ;
+        }
+    //std::cout << "[" <<  (*it_end).first << " : " << (*it_end).second << "]." << std::endl;
+    
+  }
+ }
 
 /*
 template < typename key_type, typename value_type>
@@ -274,13 +371,27 @@ int main() {
   Tree.insert(15,2);
   Tree.insert(10,2);
   Tree.insert(20,2);
+  Tree.insert(6,2);
   Tree.insert(30,2);
   Tree.insert(16,2);
-  Tree.print();
-  BST<int, int>::Iterator first = Tree.begin();
-  BST<int, int>::Iterator last = Tree.end();
+  
+  /*
+  Tree.insert(15,2);
+  Tree.insert(20,2);
+  Tree.insert(30,2);
+  Tree.insert(10,2);
+  Tree.insert(7,2);
+  Tree.insert(3,2);
+  */
   BST<int, int>::ConstIterator cfirst = Tree.cbegin();
   BST<int, int>::ConstIterator clast = Tree.cend();
+  
+  std::cout << "INIZIO A PRINTARE" << std::endl;
+  Tree.print();
+  //BST<int, int>::Iterator first = Tree.begin();
+  //BST<int, int>::Iterator last = Tree.end();
+  //BST<int, int>::ConstIterator cfirst = Tree.cbegin();
+  //BST<int, int>::ConstIterator clast = Tree.cend();
   std::cout << "funziona lo scheletro" << std::endl;
   };
 

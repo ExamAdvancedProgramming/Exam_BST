@@ -4,35 +4,24 @@ class BST<key_type, value_type>::Iterator {
     private:
         using Node = BST<key_type, value_type>::Node;
         Node* current;
-        Node* _root;
-
+        
     public:
-        Iterator(Node* n, Node* r) : current{n}, _root{r} {};
-        value_type& operator*() const { return current->value; }
-        key_type& operator!() const { return current->key; }
+        Iterator(Node* n) : current{n} {};
+        std::pair<key_type, value_type> operator*() const { return std::make_pair(current -> key, current -> value); }
 
   // ++iterator definition
   
     Iterator& operator++() {
-        Node* last = _root;
-        while(last -> right){
-            last = last -> right.get();
-            }
-        if (current == last){
-            return *this;
-        }
-        else if(current -> right.get() == nullptr && current -> parent -> right.get() == current){
-            current = current -> parent -> parent;
-            }
-        else if(current -> right.get() == nullptr && current -> parent -> left.get() == current){ 
-            current = current -> parent;
-            }
-        else if(current -> right.get() != nullptr){
+       
+        if(current -> right.get() != nullptr){
             current = current -> right.get();
             while(current -> left.get()){
                 current = current -> left.get();
                 }
             }
+        else{
+            current = current -> parent;
+        }
         return *this;
         }
   

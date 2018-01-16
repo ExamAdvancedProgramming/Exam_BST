@@ -31,11 +31,11 @@ int main() {
     auto find1 = Tree.find(16);
     auto find2 = Tree.find(30); 
     Tree.find(55);
-    std::cout << "Found the keys " << !find1 << "and " << !find2 << std::endl;
+    std::cout << "Found the keys " << (*find1).first << " and " << (*find2).second << std::endl;
     Tree.print();
     Tree.clear();
     Tree.print();           //expected empty
-    std::cout << "funziona lo scheletro" << std::endl;
+    std::cout << "FUNZIONA" << std::endl;
     
     };
 
