@@ -37,15 +37,35 @@ class BST {
   
   
   
-    Node* BalancedTree(std::vector<std::pair<key_type, value_type>> array, int start, int end){
+    Node* BalancedTree(std::vector<std::pair<key_type, value_type>> array,int dim){
     std::cout << "SONO IO" << std::endl;
     
-    if (start > end){
-        std::cout << "Sono finito" << std::endl;
-        return nullptr;
-     }
-    int mid = (start + end)/2;
-    root.reset(new Node{(array[mid]).first,(array[mid]).second});
+    int b {0};
+    int e {0};
+    int mid {0};
+    std::vector<int> indicator {};
+    
+    for (int i = 0; i != dim; ++i){
+    indicator.push_back(1);
+    };
+    indicator.push_back(0);
+    
+    while(indicator!=0){
+        if(mid!=dim){
+            while ((array[b]).first==0){
+                b++;
+            };
+            while ((array[e+1]).first != 0){
+                e++
+            };
+            mid = (b+e)/2;
+            indicator[mid] = 0;
+            insert((array[mid]).first,(array[mid]).second);
+        };
+        else{
+        return;
+        };
+    };
     
     return root.get();
     }
@@ -385,7 +405,7 @@ void BST<key_type,value_type>::balance(){
     dim = dim + 1;
     }
     root.reset();
-    BalancedTree(arr, 0, dim);
+    BalancedTree(arr, dim);
     
     
     }
