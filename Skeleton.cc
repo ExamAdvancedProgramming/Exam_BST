@@ -46,23 +46,7 @@ class BST {
      }
     int mid = (start + end)/2;
     root.reset(new Node{(array[mid]).first,(array[mid]).second});
-    std::cout << root -> key  << "    " << mid << std::endl;
-    //insert((array[mid]).first, (array[mid]).second);
-    //
-    //std::cout << "SONO LA ROOT" << root ->std::endl;
-    //return root.get();
-    /* Recursively construct the left subtree and make it
-       left child of root */
-    root->left.reset(BalancedTree(array, start, mid-1));
-    std::cout << "sx" << std::endl;
-    //root -> left -> parent = root.get();
-    /* Recursively construct the right subtree and make it
-       right child of root */
-    root->right.reset(BalancedTree(array, mid + 1, 13));
-    std::cout << "dx" << std::endl;
-    //std::cout << "SONO IO" << std::endl;
-    //root -> right -> parent = root -> parent;
-    //std::cout << "SONO IO 2" << std::endl;
+    
     return root.get();
     }
  
