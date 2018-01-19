@@ -1,6 +1,7 @@
 #include <iostream>
 #include <memory>
 #include <utility>
+#include <vector>
 
 
 template < typename key_type, typename value_type>
@@ -35,6 +36,35 @@ class BST {
   void erase();
   
   
+  
+    Node* BalancedTree(std::vector<std::pair<key_type, value_type>> array, int start, int end){
+    std::cout << "SONO IO" << std::endl;
+    
+    if (start > end){
+        std::cout << "Sono finito" << std::endl;
+        return nullptr;
+     }
+    int mid = (start + end)/2;
+    root.reset(new Node{(array[mid]).first,(array[mid]).second});
+    std::cout << root -> key  << "    " << mid << std::endl;
+    //insert((array[mid]).first, (array[mid]).second);
+    //
+    //std::cout << "SONO LA ROOT" << root ->std::endl;
+    //return root.get();
+    /* Recursively construct the left subtree and make it
+       left child of root */
+    root->left.reset(BalancedTree(array, start, mid-1));
+    std::cout << "sx" << std::endl;
+    //root -> left -> parent = root.get();
+    /* Recursively construct the right subtree and make it
+       right child of root */
+    root->right.reset(BalancedTree(array, mid + 1, 13));
+    std::cout << "dx" << std::endl;
+    //std::cout << "SONO IO" << std::endl;
+    //root -> right -> parent = root -> parent;
+    //std::cout << "SONO IO 2" << std::endl;
+    return root.get();
+    }
  
   
    /*std::unique_ptr<Node> operator=(const Node* m) {
@@ -119,7 +149,7 @@ class BST<key_type, value_type>::Iterator  {
   // ++it
   Iterator& operator++() {
     if(current -> right.get() != nullptr){
-            std::cout << "Ma ci passo qui3?" << std::endl;
+            //std::cout << "Ma ci passo qui3?" << std::endl;
             current = current -> right.get();
             while(current -> left.get()){
                 current = current -> left.get();
@@ -357,6 +387,27 @@ Node* first_key = root.get();
   */  
 
 
+
+template < typename key_type, typename value_type>
+void BST<key_type,value_type>::balance(){
+    std::vector<std::pair<key_type, value_type>> arr {};
+    auto it {this->cbegin()};
+    auto it_end{this->cend()};
+    int dim = 0;
+    
+    for ( ; it != it_end; ++it){
+    std::cout << dim << std::endl;
+    arr.push_back(*it);
+    dim = dim + 1;
+    }
+    root.reset();
+    BalancedTree(arr, 0, dim);
+    
+    
+    }
+
+
+
 int main() {
   BST<int, int> Tree{};
   Tree.insert(8,2);
@@ -386,7 +437,9 @@ int main() {
   BST<int, int>::ConstIterator cfirst = Tree.cbegin();
   BST<int, int>::ConstIterator clast = Tree.cend();
   
-  std::cout << "INIZIO A PRINTARE" << std::endl;
+  //std::cout << "INIZIO A PRINTARE" << std::endl;
+  Tree.print();
+  Tree.balance();
   Tree.print();
   //BST<int, int>::Iterator first = Tree.begin();
   //BST<int, int>::Iterator last = Tree.end();
