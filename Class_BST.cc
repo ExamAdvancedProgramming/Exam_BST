@@ -19,6 +19,16 @@ class BST {
         std::unique_ptr<Node> right;
         
         Node(const key_type  k, const value_type  v, Node* p = nullptr) : key{k}, value{v}, parent{p}, left{nullptr}, right{nullptr} {}
+    
+        // copy-constructor for the node
+        Node(const Node& other) {
+            value = other.value;
+            key = other.key;
+            parent = other.parent;
+            left.reset(other.left.get());
+            right.reset(other.right.get());
+            }
+    
     };
   
     std::unique_ptr<Node> root;
@@ -32,6 +42,55 @@ class BST {
     void clear();
     void balance();
     void erase();
+  
+    // Copy-Constructor
+  
+    BST(const BST &other) { 
+    if (other.root == nullptr){
+        root.reset();
+    }
+    root.reset(new Node(*(other.root)));
+    }  
+    
+    // Move-Constructor
+    
+    BST( BST<key_type, value_type>&& other) {
+    root = std::move(other.root);
+    }
+    
+    //Copy-Assignment.
+    
+    BST& operator=(const BST<key_type, value_type>& other){
+
+      if (this == &other) {
+        return *this; 
+        }
+        
+      if (root != nullptr){
+        root.reset();
+        }
+
+      if (other.root != nullptr) {
+        root.reset(new Node(*(other.root)));
+        }
+
+      return *this;
+      }
+    
+    
+     // move assignment
+    BST& operator=(BST<key_type, value_type>&& other){
+      if (root != nullptr){
+            root.reset();
+         }
+         
+      if (other.root != nullptr){
+        root = std::move(other.root);
+      }
+
+      return *this;
+    }  
+  
   
     class Iterator;
   

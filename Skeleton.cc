@@ -17,6 +17,18 @@ class BST {
   Node* parent;
   Node(const key_type  k, const value_type  v, Node* p = nullptr)  : value{v}, key{k}, parent{p}, left{nullptr}, right{nullptr} {}
  
+  // copy-constructor for the node
+  Node(const Node& other) {
+    value = other.value;
+    key = other.key;
+    parent = other.parent;
+    left.reset(other.left.get());
+    right.reset(other.right.get());
+    std::cout << "Node copy-constructed." << std::endl; }
+  
+  
+  
+  
   };
   
   
@@ -27,15 +39,67 @@ class BST {
   
   class Iterator;
   
-  BST() : root{nullptr} {};
+    BST() : root{nullptr} {};
    ~ BST (){}
-  void insert (const key_type  k, const value_type  v);
-  void print() const;
-  void clear() const;
-  void balance();
-  void erase();
+     void insert (const key_type  k, const value_type  v);
+    void print() const;
+    void clear() const;
+    void balance();
+    void erase();
   
-  
+    
+    
+    // Copy-Constructor
+    BST(const BST &other) { 
+    root.reset(new Node(*(other.root)));
+    }  
+    
+    // Move-Constructor
+    BST( BST<key_type, value_type>&& other) {
+    root = std::move(other.root);
+    }
+    
+    //Copy-Assignment.
+    BST& operator=(const BST<key_type, value_type>& other)
+    {
+      std::cout << "copy-assignment..." << std::endl;
+
+      if (this == &other) {
+      return *this; // handle self-assignment
+        }
+        
+      if (root != nullptr)
+      {
+        std::cout << "Clearing out previous content at left-side..." << std::endl;
+        root.reset();
+      }
+
+      // if the other tree isn't empty, it's copied from its root.
+      if (other.root != nullptr) {
+        root.reset(new Node(*(other.root)));
+        }
+
+      return *this;
+    }
+    
+    
+     // move assignment
+    BST& operator=(BST<key_type, value_type>&& other)
+    {
+      if (root != nullptr){
+            root.reset();
+         }
+      if (other.root != nullptr)
+      {
+        std::cout << "Moving root to the left-side." << std::endl;
+        root = std::move(other.root);
+      }
+
+      return *this;
+    }
+    
+      
+    
   
     Node* BalancedTree(std::vector<std::pair<key_type, value_type>> array,int dim){
     std::cout << "SONO IO" << std::endl;
@@ -71,20 +135,7 @@ class BST {
     }
  
   
-   /*std::unique_ptr<Node> operator=(const Node* m) {
-    if (m != this) {
-        this -> left = m -> left;
-        this -> right = m -> right;
-        this -> parent = m -> parent;
-        this -> key = m -> key;
-        this -> value = m-> value;
-        
-      }
-    
-    return *this;
-    }
-    */
-  
+   
 
   
  
@@ -443,8 +494,55 @@ int main() {
   
   //std::cout << "INIZIO A PRINTARE" << std::endl;
   Tree.print();
-  Tree.balance();
+ BST<int, int> Other_Tree(Tree);
+ BST<int, int> Moved_Tree(std::move(Tree));
+  
+  BST<int, int> Tree_to_be_assigned{};
+  Tree_to_be_assigned.insert(5,7),
+  Tree_to_be_assigned.insert(13,2);
+  Tree_to_be_assigned.insert(15,2);
+  Tree_to_be_assigned.insert(10,2);
+  Tree_to_be_assigned.insert(20,2);
+  
+  BST<int, int> Tree_short{};
+  Tree_short.insert(5,7),
+  Tree_short.insert(13,2);
+ Tree_short.insert(15,2);
+  Tree_short.insert(10,2);
+  Tree_short.insert(20,2);
+  /*
+  Tree.insert(15,2);
+  Tree.insert(20,2);
+  Tree.insert(30,2);
+  Tree.insert(10,2);
+  Tree.insert(7,2);
+  Tree.insert(3,2);
+  */
+  //BST<int, int>::ConstIterator cfirst = Tree.cbegin();
+  //BST<int, int>::ConstIterator clast = Tree.cend();
+  
+  //std::cout << "INIZIO A PRINTARE" << std::endl;
+  //Tree.print();
+  //Other_Tree.print();
+  Other_Tree.insert(40,40);
+  Other_Tree.print();
   Tree.print();
+  std::cout << "Print moved Tree" << std::endl;
+  Moved_Tree.print();
+  std::cout << "Print Tree_to_be assigned before the assignment" << std::endl;
+  Tree_to_be_assigned.print();
+  Tree_to_be_assigned = Moved_Tree;
+  Tree_to_be_assigned.insert(1,1);
+  Tree_to_be_assigned.print();
+  Moved_Tree.print();
+  
+  std::cout << "Study moving assignment" << std::endl;
+  //Tree_to_be_assigned = Moved_Tree; //Cannot assign Tree since is moved.
+  //Tree_to_be_assigned.print();
+  Other_Tree = std::move(Tree_short);
+  Other_Tree.insert(40,40);
+  Other_Tree.print(); //expected "shorter" tree
+  Tree_short.print(); //expected empty tree
   //BST<int, int>::Iterator first = Tree.begin();
   //BST<int, int>::Iterator last = Tree.end();
   //BST<int, int>::ConstIterator cfirst = Tree.cbegin();
