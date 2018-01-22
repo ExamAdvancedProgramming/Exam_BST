@@ -42,6 +42,8 @@ int main() {
     std::cout << "               " << std::endl;
     
     BST<int, int> Other_Tree(Tree);
+    Other_Tree.clear();
+    Tree.print();
     BST<int, int> Moved_Tree(std::move(Tree));
     BST<int, int> Tree_to_be_assigned{};
     Tree_to_be_assigned.insert(5,7),
