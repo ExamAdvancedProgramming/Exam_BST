@@ -2,6 +2,7 @@
 #include <memory>
 #include <utility>
 #include <vector>
+#include <numeric>
 
 
 template < typename key_type, typename value_type>
@@ -101,37 +102,63 @@ class BST {
       
     
   
-    Node* BalancedTree(std::vector<std::pair<key_type, value_type>> array,int dim){
+    void BalancedTree(std::vector<std::pair<key_type, value_type>> array,int dim){
     std::cout << "SONO IO" << std::endl;
     
-    int b {0};
-    int e {0};
+    
     int mid {0};
     std::vector<int> indicator {};
     
     for (int i = 0; i != dim; ++i){
     indicator.push_back(1);
     };
+    
     indicator.push_back(0);
+    int sum_indicator = 1;
+    std::vector<int> finder {};
+    finder.push_back(1);
+    finder.push_back(0);
+    std::cout<<"Sono finder e sono "<<std::endl;
+    std::vector<int> indicatorjj1 {};
+    indicatorjj1.push_back(0);
+    indicatorjj1.push_back(0);
     
-    while(indicator!=0){
-        if(mid!=dim){
-            while ((array[b]).first==0){
-                b++;
-            };
-            while ((array[e+1]).first != 0){
-                e++
-            };
-            mid = (b+e)/2;
-            indicator[mid] = 0;
-            insert((array[mid]).first,(array[mid]).second);
+    while(sum_indicator!=0){
+        int b{0};
+        int e{0};
+        int i{0};
+        int j{0};
+        while (indicator[i]==0){
+            b++;
+            i++;
+            std::cout<<"i è "<<i<<std::endl;
         };
-        else{
-        return;
+        while (indicatorjj1 != finder){
+            e++;
+            j++;
+            
+            std::cout<<"j è "<<j<<std::endl;
+            indicatorjj1[0] = indicator[j];
+            indicatorjj1[1] = indicator[j+1];
         };
+        
+        indicatorjj1[0] = 0;
+        indicatorjj1[1] = 0;
+        
+        mid = (b+e)/2;
+        std::cout<<"b è "<<b<<std::endl;
+        std::cout<<"e è "<<e<<std::endl;
+        std::cout<<"mid è "<<mid<<std::endl;
+        indicator[mid] = 0;
+        sum_indicator = std::accumulate(indicator.begin(), indicator.end(), 0);
+        insert((array[mid]).first,(array[mid]).second);
     };
-    
-    return root.get();
+    std::cout<<"la somma è "<<sum_indicator<<std::endl;
+    finder.clear();
+    indicator.clear();
+    indicatorjj1.clear();
+    std::cout<<"la somma è ancora "<<sum_indicator<<std::endl;
+    //return root.get();
     }
  
   
@@ -457,7 +484,8 @@ void BST<key_type,value_type>::balance(){
     }
     root.reset();
     BalancedTree(arr, dim);
-    
+    std::cout << "DO FASTIDIO?" << std::endl;
+    //root.reset(temp);
     
     }
 
@@ -491,11 +519,15 @@ int main() {
   */
   BST<int, int>::ConstIterator cfirst = Tree.cbegin();
   BST<int, int>::ConstIterator clast = Tree.cend();
-  
+  Tree.balance();
+  Tree.print();
+  /*
   //std::cout << "INIZIO A PRINTARE" << std::endl;
   Tree.print();
- BST<int, int> Other_Tree(Tree);
- BST<int, int> Moved_Tree(std::move(Tree));
+  BST<int, int> Other_Tree(Tree);
+  //BST<int, int> Moved_Tree(std::move(Tree));
+  //Tree.clear();
+  //Other_Tree.print();
   
   BST<int, int> Tree_to_be_assigned{};
   Tree_to_be_assigned.insert(5,7),
@@ -507,17 +539,17 @@ int main() {
   BST<int, int> Tree_short{};
   Tree_short.insert(5,7),
   Tree_short.insert(13,2);
- Tree_short.insert(15,2);
+  Tree_short.insert(15,2);
   Tree_short.insert(10,2);
   Tree_short.insert(20,2);
-  /*
+  
   Tree.insert(15,2);
   Tree.insert(20,2);
   Tree.insert(30,2);
   Tree.insert(10,2);
   Tree.insert(7,2);
   Tree.insert(3,2);
-  */
+  
   //BST<int, int>::ConstIterator cfirst = Tree.cbegin();
   //BST<int, int>::ConstIterator clast = Tree.cend();
   
@@ -528,13 +560,13 @@ int main() {
   Other_Tree.print();
   Tree.print();
   std::cout << "Print moved Tree" << std::endl;
-  Moved_Tree.print();
+  //Moved_Tree.print();
   std::cout << "Print Tree_to_be assigned before the assignment" << std::endl;
   Tree_to_be_assigned.print();
-  Tree_to_be_assigned = Moved_Tree;
+  //Tree_to_be_assigned = Moved_Tree;
   Tree_to_be_assigned.insert(1,1);
   Tree_to_be_assigned.print();
-  Moved_Tree.print();
+  //Moved_Tree.print();
   
   std::cout << "Study moving assignment" << std::endl;
   //Tree_to_be_assigned = Moved_Tree; //Cannot assign Tree since is moved.
@@ -547,7 +579,7 @@ int main() {
   //BST<int, int>::Iterator last = Tree.end();
   //BST<int, int>::ConstIterator cfirst = Tree.cbegin();
   //BST<int, int>::ConstIterator clast = Tree.cend();
-  std::cout << "funziona lo scheletro" << std::endl;
+  std::cout << "funziona lo scheletro" << std::endl;*/
   };
 
 
