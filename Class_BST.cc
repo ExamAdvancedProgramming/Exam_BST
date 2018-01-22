@@ -36,12 +36,13 @@ class BST {
   
   public:
     BST() : root{nullptr} {};
-    ~ BST (){}
+     ~ BST (){}
     void insert (const key_type  k, const value_type  v);
     void print() const;
     void clear();
     void balance();
     void erase();
+    void BalancedTree(std::vector<std::pair<key_type, value_type>> array,int dim);
   
     // Copy-Constructor
   
@@ -56,6 +57,7 @@ class BST {
     
     BST( BST<key_type, value_type>&& other) {
     root = std::move(other.root);
+    other.root.reset();
     }
     
     //Copy-Assignment.
@@ -73,7 +75,7 @@ class BST {
       if (other.root != nullptr) {
         root.reset(new Node(*(other.root)));
         }
-
+        
       return *this;
       }
     
@@ -85,7 +87,8 @@ class BST {
          }
          
       if (other.root != nullptr){
-        root = std::move(other.root);
+         root = std::move(other.root);
+         other.root.reset();
       }
 
       return *this;
