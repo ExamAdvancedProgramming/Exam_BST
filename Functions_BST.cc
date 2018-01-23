@@ -73,27 +73,45 @@ void BST<key_type, value_type>::clear() {
 
 template < typename key_type, typename value_type>
 void BST<key_type,value_type>::Better_BalancedTree(int b1, int e1, int b2, int e2, std::vector<std::pair<key_type, value_type>> array){
-    if (b1 < e1){
+    std::cout << "b1 è " << b1 << " e1 è " << e1 << " b2 è " << b2 << " e2 è " << e2 << std::endl;
+    
+    if (b1 <= e1){
     
     int mid1 = (b1 + e1)/2;
     int mid2 = (b2 + e2)/2;
     
-    this -> insert((array[mid1]).first, (array[mid1]).second);
-    this -> insert((array[mid2]).first, (array[mid2]).second);
+    insert((array[mid1]).first, (array[mid1]).second);
+    insert((array[mid2]).first, (array[mid2]).second);
     Better_BalancedTree(b1, mid1 -1, mid1 +1, e1, array);
     
-    }
-    if (b2 < e2){
+    };
+    if (b2 <= e2){
     
     int mid2 = (b2 + e2)/2;
     
-    this -> insert((array[b1]).first, (array[b1]).second);
+    //this -> insert((array[b1]).first, (array[b1]).second);
     //this -> insert((array[e1]).first, (array[e1]).second);
-    this -> insert((array[mid2]).first, (array[mid2]).second);
-    this -> Better_BalancedTree(b2, mid2 -1, mid2 +1, e2, array);
+    insert((array[mid2]).first, (array[mid2]).second);
+    Better_BalancedTree(b2, mid2 -1, mid2 +1, e2, array);
     
     
-    }
+    };
+    std::cout << " " << std::endl;
+    
+    std::cout << "SONO FUORI" << std::endl;
+    std::cout << " " << std::endl;
+    std::cout << "B1 è " << b1 << " E1 è " << e1 << " B2 è " << b2 << " E2 è " << e2 << std::endl;
+    /*if (b1 == e1){
+    std::cout << "Sono nel caso uguale 1" <<std::endl;
+    this -> insert((array[b1]).first, (array[b1]).second);
+    };
+    if(b2 == e2){
+    std::cout << "Sono nel caso uguale 2" <<std::endl;
+    this -> insert((array[b2]).first, (array[b2]).second);
+    */
+   // }
+    
+    
 }
 
 
@@ -192,10 +210,10 @@ void BST<key_type,value_type>::better_balance(){
         arr.push_back(*it);
         dim = dim + 1;
         }
-    int mid = dim/2;
+    int mid = (dim -1 )/2;
     root.reset();
     insert((arr[mid]).first, (arr[mid]).second);
-    Better_BalancedTree(0, mid -1, mid +1, dim, arr);
+    Better_BalancedTree(0, mid -1, mid +1, dim -1, arr);
 
     
     }       
