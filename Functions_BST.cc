@@ -21,7 +21,7 @@ void BST<key_type,value_type>::insert(const key_type k, const value_type v){
                 next = next -> right.get();
                 }
             else {
-                std::cout << "This key already exists!" << std::endl;
+                std::cout << "This node exists! " << temp -> left -> key << std::endl;
                 return;
                 }
             }
@@ -68,6 +68,45 @@ void BST<key_type, value_type>::clear() {
     }
     
 }   
+
+
+
+template < typename key_type, typename value_type>
+void BST<key_type,value_type>::Better_BalancedTree(int b1, int e1, int b2, int e2, std::vector<std::pair<key_type, value_type>> array){
+    if (b1 < e1){
+    
+    int mid1 = (b1 + e1)/2;
+    int mid2 = (b2 + e2)/2;
+    
+    this -> insert((array[mid1]).first, (array[mid1]).second);
+    this -> insert((array[mid2]).first, (array[mid2]).second);
+    Better_BalancedTree(b1, mid1 -1, mid1 +1, e1, array);
+    
+    }
+    if (b2 < e2){
+    
+    int mid2 = (b2 + e2)/2;
+    
+    this -> insert((array[b1]).first, (array[b1]).second);
+    //this -> insert((array[e1]).first, (array[e1]).second);
+    this -> insert((array[mid2]).first, (array[mid2]).second);
+    this -> Better_BalancedTree(b2, mid2 -1, mid2 +1, e2, array);
+    
+    
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -140,6 +179,26 @@ void BST<key_type,value_type>::balance(){
 
     
     }   
+    
+    
+template < typename key_type, typename value_type>
+void BST<key_type,value_type>::better_balance(){
+    std::vector<std::pair<key_type, value_type>> arr {};
+    auto it {this->cbegin()};
+    auto it_end{this->cend()};
+    int dim = 0;
+    
+    for ( ; it != it_end; ++it){
+        arr.push_back(*it);
+        dim = dim + 1;
+        }
+    int mid = dim/2;
+    root.reset();
+    insert((arr[mid]).first, (arr[mid]).second);
+    Better_BalancedTree(0, mid -1, mid +1, dim, arr);
+
+    
+    }       
     
    
 

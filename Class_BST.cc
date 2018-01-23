@@ -25,9 +25,11 @@ class BST {
             value = other.value;
             key = other.key;
             parent = other.parent;
-            left.reset(other.left.get());
-            right.reset(other.right.get());
+            left.reset();
+            right.reset();
             }
+            
+       
     
     };
   
@@ -41,17 +43,43 @@ class BST {
     void print() const;
     void clear();
     void balance();
+    void better_balance();
     void erase();
     void BalancedTree(std::vector<std::pair<key_type, value_type>> array,int dim);
+    void Better_BalancedTree(int b1, int e1, int b2, int e2, std::vector<std::pair<key_type, value_type>> array);
   
+    
+    
+    
+    void CopyNode(Node* new_node, Node* old_node){
+       if(old_node -> left){
+            new_node -> left.reset( new Node(old_node -> left -> key, old_node -> left -> value, new_node));
+            CopyNode(new_node -> left.get(), old_node -> left.get());
+        }
+       if(old_node -> right){
+        new_node -> right.reset( new Node(old_node -> right -> key, old_node -> right -> value, new_node -> parent));
+            CopyNode(new_node -> right.get(), old_node -> right.get());
+        }    
+        
+       }
+    
+    
     // Copy-Constructor
-  
+    BST(const BST &other) { 
+    root.reset(new Node(other.root -> key, other.root -> value));
+    CopyNode(root.get(), other.root.get());
+    }  
+    
+    
+    // Copy-Constructor
+  /*
     BST(const BST &other) { 
     if (other.root == nullptr){
         root.reset();
     }
     root.reset(new Node(*(other.root)));
     }  
+    */
     
     // Move-Constructor
     
@@ -73,7 +101,8 @@ class BST {
         }
 
       if (other.root != nullptr) {
-        root.reset(new Node(*(other.root)));
+        root.reset(new Node(other.root -> key, other.root -> value));
+        CopyNode(root.get(), other.root.get());
         }
         
       return *this;

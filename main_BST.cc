@@ -36,21 +36,45 @@ int main() {
     Tree.find(55);
     std::cout << "Found the keys " << (*find1).first << " and " << (*find2).second << std::endl;
     Tree.print();
-    Tree.balance();
+    Tree.better_balance();
     std::cout << "               " << std::endl;
     std::cout << "Expected Tree (but balanced)" << std::endl;
     std::cout << "               " << std::endl;
     Tree.print();
     
-    
+    /*
     std::cout << "               " << std::endl;
     std::cout << "COPY - MOVE TEST " << std::endl;
     std::cout << "               " << std::endl;
     
-    BST<int, int> Other_Tree{};
+    BST<int, int> Other_Tree(Tree);
     BST<int, int> Moved_Tree(std::move(Tree));
     BST<int, int> Tree_to_be_assigned{};
-    Tree_to_be_assigned.insert(5,7),
+    
+    
+    std::cout << "               " << std::endl;
+    std::cout << "Expected Tree copied" << std::endl;
+    std::cout << "               " << std::endl;
+    
+    
+    Other_Tree.print();
+    Other_Tree.insert(55,7);
+    
+    std::cout << "               " << std::endl;
+    std::cout << "Expected Tree copied with 55" << std::endl;
+    std::cout << "               " << std::endl;
+    
+    Other_Tree.print();
+    
+    std::cout << "               " << std::endl;
+    std::cout << "Expected Tree" << std::endl;
+    std::cout << "               " << std::endl;
+    
+    Tree.print();
+    
+    
+    
+    Tree_to_be_assigned.insert(5,7);
     Tree_to_be_assigned.insert(13,2);
     BST<int, int> Tree_short{};
     Tree_short.insert(10,2);
@@ -60,7 +84,7 @@ int main() {
     std::cout << "Expected Tree" << std::endl;
     std::cout << "               " << std::endl;
     
-    //Other_Tree.print();
+    Other_Tree.print();
     
     std::cout << "               " << std::endl;
     std::cout << "Expected empty" << std::endl;
@@ -72,7 +96,7 @@ int main() {
     std::cout << "Expected Tree" << std::endl;
     std::cout << "               " << std::endl;
     
-    Moved_Tree.print();
+    //Moved_Tree.print();
     
     std::cout << "               " << std::endl;
     std::cout << "Expected [5 : 7] [13 : 2]" << std::endl;
@@ -80,7 +104,7 @@ int main() {
     
     
     Tree_to_be_assigned.print();
-    //Tree_to_be_assigned = Tree_short;
+    Tree_to_be_assigned = Tree_short;
     Other_Tree = std::move(Tree_short);
     
     std::cout << "               " << std::endl;
@@ -106,7 +130,7 @@ int main() {
     std::cout << "Expected empty" << std::endl;
     Other_Tree.print();
     
-    
+    */
     std::cout << "FUNZIONA" << std::endl;
     
     };
