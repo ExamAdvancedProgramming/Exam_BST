@@ -186,7 +186,36 @@ void BST<key_type,value_type>::better_balance(){
     Better_BalancedTree(0, mid -1, mid +1, dim, arr);
 
     
-    }       
+    }  
+/*
+template < typename key_type, typename value_type>
+BST<key_type,value_type> ::Iterator :: better_find(const key_type k){
+
+if (root == nullptr){
+    
+        return Iterator{nullptr}; 
+        }
+    else {
+        Node* next = root.get(); 
+        while(k != next -> key && next != nullptr){
+            if(k < next -> key){
+                next = next -> left.get();
+                }
+            else if (k > next -> key){
+                next = next -> right.get();
+                }
+      
+            }
+        }
+    if(next == nullptr){
+    std::cout << "Key not found!" << std::endl;
+    return Iterator{nullptr}; 
+    }
+    return Iterator{next};
+
+
+}   
+*/ 
     
    
 

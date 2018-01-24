@@ -42,6 +42,7 @@ class BST {
         void balance();
         void better_balance();
         void erase();
+        
         void BalancedTree(std::vector<std::pair<key_type, value_type>> array,int dim);
         void Better_BalancedTree(int b1, int e1, int b2, int e2, std::vector<std::pair<key_type, value_type>> array);
   
@@ -110,6 +111,33 @@ class BST {
   
   
         class Iterator;
+        
+            
+Iterator better_find(const key_type k){
+Node* next = root.get(); 
+Node* temp = root.get(); 
+if (root == nullptr){
+    
+        return Iterator{nullptr}; 
+        }
+    else {
+        
+        while(next != nullptr && k != next -> key ){
+            if(k < next -> key){
+                next = next -> left.get();
+                }
+            else if (k > next -> key){
+                next = next -> right.get();
+                }
+      
+            }
+        }
+    if(next == nullptr){
+    std::cout << "Key not found!" << std::endl;
+    return Iterator{nullptr}; 
+    }
+    return Iterator{next};
+    }
   
             Iterator begin() {
         
