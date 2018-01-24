@@ -162,6 +162,20 @@ class BST {
                 }
   
             ConstIterator cend() const { return ConstIterator{nullptr}; }
+            
+    
+            ConstIterator last() const { 
+        
+                Node* first_key = root.get();
+        
+                while(first_key -> right.get()){
+                    first_key = first_key -> right.get();
+                };
+        
+                std::cout<<"Last key: "<<first_key -> key<<"; Last value: "<<first_key -> value<<"."<<std::endl;
+                return ConstIterator{first_key}; 
+        
+                }
        
 };
 
