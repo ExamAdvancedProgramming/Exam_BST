@@ -204,16 +204,16 @@ void BST<key_type,value_type>::better_balance(){
     std::vector<std::pair<key_type, value_type>> arr {};
     auto it {this->cbegin()};
     auto it_end{this->cend()};
-    int dim = 0;
+    int dim = -1;
     
     for ( ; it != it_end; ++it){
         arr.push_back(*it);
         dim = dim + 1;
         }
-    int mid = (dim -1 )/2;
+    int mid = (dim)/2;
     root.reset();
     insert((arr[mid]).first, (arr[mid]).second);
-    Better_BalancedTree(0, mid -1, mid +1, dim -1, arr);
+    Better_BalancedTree(0, mid -1, mid +1, dim, arr);
 
     
     }       
