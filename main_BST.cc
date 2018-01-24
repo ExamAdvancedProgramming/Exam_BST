@@ -42,7 +42,7 @@ int main() {
     std::cout << "               " << std::endl;
     Tree.print();
     
-    /*
+    
     std::cout << "               " << std::endl;
     std::cout << "COPY - MOVE TEST " << std::endl;
     std::cout << "               " << std::endl;
@@ -67,11 +67,14 @@ int main() {
     Other_Tree.print();
     
     std::cout << "               " << std::endl;
-    std::cout << "Expected Tree" << std::endl;
+    std::cout << "Expected Empty" << std::endl;
     std::cout << "               " << std::endl;
     
     Tree.print();
     
+    std::cout << "               " << std::endl;
+    std::cout << "New Tree" << std::endl;
+    std::cout << "               " << std::endl;
     
     
     Tree_to_be_assigned.insert(5,7);
@@ -96,7 +99,7 @@ int main() {
     std::cout << "Expected Tree" << std::endl;
     std::cout << "               " << std::endl;
     
-    //Moved_Tree.print();
+    Moved_Tree.print();
     
     std::cout << "               " << std::endl;
     std::cout << "Expected [5 : 7] [13 : 2]" << std::endl;
@@ -130,7 +133,7 @@ int main() {
     std::cout << "Expected empty" << std::endl;
     Other_Tree.print();
     
-    */
+    
     std::cout << "FUNZIONA" << std::endl;
     
     };

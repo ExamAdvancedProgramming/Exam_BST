@@ -43,7 +43,8 @@ class BST<key_type, value_type>::Iterator {
 
 template < typename key_type, typename value_type>
 class BST<key_type,value_type> ::ConstIterator : public BST<key_type,value_type> ::Iterator {
-     using parent = BST<key_type,value_type> ::Iterator;
+     
+        using parent = BST<key_type,value_type> ::Iterator;
 
      public:
         using parent::Iterator;
