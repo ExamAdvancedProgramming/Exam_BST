@@ -3,6 +3,8 @@
 #include <utility>
 #include <vector>
 #include <numeric>
+#include <ctime>
+#include <math.h>
 
 // Files needed
 
@@ -12,46 +14,105 @@
 
 
 
+
 int main() {
     
-    BST<int, int> Tree{};
-    Tree.print();           //expected empty
-    Tree.insert(8,7);
-    Tree.insert(5,4);
-    Tree.insert(3,2);
-    Tree.insert(7,6);
-    Tree.insert(4,3);
-    Tree.insert(14,13);
-    Tree.insert(6,5);
-    Tree.insert(7,6); // node already exists!
-    Tree.insert(9,8);
-    Tree.insert(13,12);
-    Tree.insert(15,14);
-    Tree.insert(10,9);
-    Tree.insert(20,19);
-    Tree.insert(30,29);
-    Tree.insert(16,15);
-<<<<<<< HEAD
-    auto find1 = Tree.better_find(16);
-    auto find2 = Tree.better_find(30);
-    std::cout << "Found the keys " << (*find1).first << " and " << (*find2).first << std::endl; 
-    Tree.better_find(55);
-    //std::cout << "Found the keys " << (*find1).first << " and " << (*find2).second << std::endl;
-=======
-    auto find1 = Tree.find(16);
-    auto find2 = Tree.find(30); 
-    Tree.find(55);
-    std::cout << "Found the keys " << (*find1).first << " and " << (*find2).second << std::endl;
+    /// CONSTRUCTION OF THE TWO DIFFERENT TREES ///
+    
+    BST<int, int> Treeb{};
+    //Tree.print();           //expected empty
+    std::vector<int> keysb{};
+    std::vector<int> keysB{};
+    int nb = 1000;
+    int nB = 10000;
+    
+    for (int i=0; i<1000; i++){
+        int r1 = rand();
+        Treeb.insert(r1,rand());
+        if (i%5 == 0){
+            keysb.push_back(r1);
+        }
+    }
+
+    BST<int, int> TreeB{};
+    
+    for (int i=0; i<10000; i++){
+        int r1 = rand();
+        TreeB.insert(r1,rand());
+        if (i%50 == 0){
+            keysB.push_back(r1);
+        }
+    }
+
+    /// CHECKING THE TIME TO FIND THE WANTED NODES ON THE NON-BALANCED TREES ///
+    
+    std::clock_t startb;
+    double durationb;
+    startb = std::clock();
+
+        for (int i=0; i<200; i++){
+            Treeb.find(keysb[i]);
+        } 
+
+    durationb = ( std::clock() - startb ) / (double) CLOCKS_PER_SEC;
+    
+    std::clock_t startB;
+    double durationB;
+    startB = std::clock();
+
+        for (int i=0; i<200; i++){
+            TreeB.find(keysB[i]);
+        }
+
+    durationB = ( std::clock() - startB ) / (double) CLOCKS_PER_SEC;
+    
+    /// BALANCING THE TREES ///
+    
+    Treeb.better_balance();
+    
+    TreeB.better_balance();
+    
+    /// CHECKING THE TIME TO FIND THE WANTED NODES ON THE BALANCED TREES ///
+    
+    std::clock_t Bal_startb;
+    double Bal_durationb;
+    Bal_startb = std::clock();
+
+        for (int i=0; i<200; i++){
+            Treeb.find(keysb[i]);
+        }
+
+    Bal_durationb = ( std::clock() - Bal_startb ) / (double) CLOCKS_PER_SEC;
+    
+    std::clock_t Bal_startB;
+    double Bal_durationB;
+    Bal_startB = std::clock();
+
+        for (int i=0; i<200; i++){
+            TreeB.find(keysB[i]);
+        }
+
+    Bal_durationB = ( std::clock() - Bal_startB ) / (double) CLOCKS_PER_SEC;
+    
+    /// PRINTING THE RESULTS
+    
+    std::cout<<"Spent time for finding in b: "<< durationb <<std::endl;
+    std::cout<<"Spent time for finding in B: "<< durationB <<std::endl;
+    std::cout<<"Spent time for finding in balanced b: "<< Bal_durationb <<std::endl;
+    std::cout<<"Spent time for finding in balanced B: "<< Bal_durationB <<std::endl;
+    
+    std::cout<<"Comparison between times: log(n)/log(N) = " << log10(nb)/log10(nB) << ";  " << "Tb/TB = "<< Bal_durationb/Bal_durationB << "." << std::endl;
+    
+    /*
     std::cout << "Giving the last pair: "<< std::endl;
     Tree.last();
->>>>>>> 930b9bb4607eef2c03a4bad2d4b397dd1ac23b69
     Tree.print();
     Tree.better_balance();
     std::cout << "               " << std::endl;
     std::cout << "Expected Tree (but balanced)" << std::endl;
     std::cout << "               " << std::endl;
-    Tree.print();
     
+    Tree.print();
     
     std::cout << "               " << std::endl;
     std::cout << "COPY - MOVE TEST " << std::endl;
@@ -142,7 +203,7 @@ int main() {
     Other_Tree.clear();
     std::cout << "Expected empty" << std::endl;
     Other_Tree.print();
-    
+    */
     
     std::cout << "FUNZIONA" << std::endl;
     
