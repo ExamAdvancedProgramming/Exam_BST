@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include <numeric>
+#include <math.h>
 
 // Files needed
 
@@ -33,8 +34,8 @@ return rs;
  
  BST<string, string> Tree{};
  BST<string, string> Tree2{};
- std::vector<string> vec1 {};
- std::vector<string> vec2 {};
+ int nb = 1000;
+ int nB = 3000;
  
  std::clock_t start1;
  double duration1;
@@ -45,18 +46,15 @@ return rs;
  //Tree of 1000 elements
  
  
- for(int i = 0; i < 10000; i++){
- string prova = random_string(7);
- Tree.insert(prova, "aaaaaaaa");
- if(i%100 == 0){
- vec1.push_back(prova);
- }
+ for(int i = 0; i < nb; i++){
+ Tree.insert(random_string(4), "aaaaaaaa");
+ 
  }
  
  start1 = clock();
  
- for(int i = 0; i < 100; i++){
- Tree.better_find(vec1[i]);
+ for(int i = 0; i < nb; i++){
+ Tree.better_find(random_string(4));
  }
  
  duration11 = (clock() -start1)/ (double) CLOCKS_PER_SEC;
@@ -66,18 +64,14 @@ return rs;
  
  
  //Tree of 10000 elements
- for(int i = 0; i < 100000; i++){
- string prova = random_string(7);
- Tree2.insert(prova, "aaaaaaaa");
- if(i%100 == 0){
- vec2.push_back(prova);
- }
+ for(int i = 0; i < nB; i++){
+ Tree2.insert(random_string(4), "aaaaaaaa");
  }
  
  start2 = clock();
  
- for(int i = 0; i < 1000; i++){
- Tree2.better_find(vec2[i]);
+ for(int i = 0; i < nB; i++){
+ Tree2.better_find(random_string(4));
  }
  
  duration22 = (clock() -start2)/ (double) CLOCKS_PER_SEC;
@@ -90,8 +84,9 @@ return rs;
  
  start1 = clock();
  
- for(int i = 0; i < 100; i++){
- Tree.better_find(vec1[i]);
+  
+ for(int i = 0; i < nb; i++){
+ Tree.better_find(random_string(4));
  }
  
  duration1 = (clock() -start1)/ (double) CLOCKS_PER_SEC;
@@ -100,8 +95,9 @@ return rs;
  
  start2 = clock();
  
- for(int i = 0; i < 1000; i++){
- Tree2.better_find(vec2[i]);
+   
+ for(int i = 0; i < nB; i++){
+ Tree.better_find(random_string(4));
  }
  
  duration2 = (clock() -start2)/ (double) CLOCKS_PER_SEC;
@@ -111,6 +107,8 @@ return rs;
  
  std::cout << "Find in Tree1 BALANCED = " << duration1 << endl;
  std::cout << "Find in Tree2 BALANCED = " << duration2 << endl;
+ 
+ std::cout<<"Comparison between times: log(n)/log(N) = " << log10(nb)/log10(nB) << ";  " << "Tb/TB = "<< duration1/duration2 << "." << std::endl;
  }
  
  
