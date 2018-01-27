@@ -15,6 +15,8 @@
 
 
 
+
+
 int main() {
     
     /// CONSTRUCTION OF THE TWO DIFFERENT TREES ///
@@ -22,20 +24,31 @@ int main() {
     BST<int, int> Treeb{};
     //Tree.print();           //expected empty
     
-    int nb = 5000;
-    int nB = 50000;
+    int nb = 1000;
+    int nB = 10000;
+    int nBB = 1000000;
     
-    for (int i=0; i<nb; i++){
-        int r1 = rand();
-        Treeb.insert(rand(),rand());
+    /*for (int i=0; i<nb; i++){
+        Treeb.insert(rand(),1);
      }
     
 
     BST<int, int> TreeB{};
     
     for (int i=0; i<nB; i++){
-        TreeB.insert(rand(),rand());
+        TreeB.insert(rand(),1);
     }
+    */
+    
+    BST<int, int> TreeBB{};
+    
+    for (int i=0; i<nBB; i++){
+        int r = rand();
+        TreeBB.insert(r,1);
+        std::cout << i << " " << r << std::endl; 
+    }
+    
+    /*
 
     /// CHECKING THE TIME TO FIND THE WANTED NODES ON THE NON-BALANCED TREES ///
     
@@ -44,7 +57,7 @@ int main() {
     startb = std::clock();
 
         for (int i=0; i<nb; i++){
-            Treeb.find(rand());
+            Treeb.better_find(rand());
         } 
 
     durationb = ( std::clock() - startb ) / (double) CLOCKS_PER_SEC;
@@ -54,10 +67,21 @@ int main() {
     startB = std::clock();
 
         for (int i=0; i<nB; i++){
-            TreeB.find(rand());
+            TreeB.better_find(rand());
         }
 
     durationB = ( std::clock() - startB ) / (double) CLOCKS_PER_SEC;
+    
+    
+    std::clock_t startBB;
+    double durationBB;
+    startB = std::clock();
+
+        for (int i=0; i<nBB; i++){
+            TreeBB.better_find(rand());
+        }
+
+    durationBB = ( std::clock() - startBB ) / (double) CLOCKS_PER_SEC;
     
     /// BALANCING THE TREES ///
     
@@ -65,6 +89,7 @@ int main() {
     
     TreeB.better_balance();
     
+    TreeBB.better_balance();
     /// CHECKING THE TIME TO FIND THE WANTED NODES ON THE BALANCED TREES ///
     
     std::clock_t Bal_startb;
@@ -72,7 +97,7 @@ int main() {
     Bal_startb = std::clock();
 
         for (int i=0; i<nb; i++){
-            Treeb.find(rand());
+            Treeb.better_find(rand());
         } 
 
     Bal_durationb = ( std::clock() - Bal_startb ) / (double) CLOCKS_PER_SEC;
@@ -82,19 +107,32 @@ int main() {
     Bal_startB = std::clock();
 
         for (int i=0; i<nB; i++){
-            TreeB.find(rand());
+            TreeB.better_find(rand());
         }
 
     Bal_durationB = ( std::clock() - Bal_startB ) / (double) CLOCKS_PER_SEC;
+    
+    std::clock_t Bal_startBB;
+    double Bal_durationBB;
+    Bal_startBB = std::clock();
+
+        for (int i=0; i<nBB; i++){
+            TreeBB.better_find(rand());
+        }
+
+    Bal_durationBB = ( std::clock() - Bal_startBB ) / (double) CLOCKS_PER_SEC;
     
     /// PRINTING THE RESULTS
     
     std::cout<<"Spent time for finding in b: "<< durationb <<std::endl;
     std::cout<<"Spent time for finding in B: "<< durationB <<std::endl;
+    std::cout<<"Spent time for finding in BB: "<< durationBB <<std::endl;
     std::cout<<"Spent time for finding in balanced b: "<< Bal_durationb <<std::endl;
     std::cout<<"Spent time for finding in balanced B: "<< Bal_durationB <<std::endl;
+    std::cout<<"Spent time for finding in balanced BB: "<< Bal_durationBB <<std::endl;
+    
     
     std::cout<<"Comparison between times: log(n)/log(N) = " << log10(nb)/log10(nB) << ";  " << "Tb/TB = "<< Bal_durationb/Bal_durationB << "." << std::endl;
     
-    
+    */
     }
