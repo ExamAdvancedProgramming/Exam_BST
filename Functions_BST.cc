@@ -19,7 +19,11 @@ void BST<key_type,value_type>::insert(const key_type k, const value_type v){
                 next = next -> right.get();
                 }
             else {
+<<<<<<< HEAD
                 std::cout << "Node" << next -> key << "already exists"<< std::endl;
+=======
+                std::cout << "This node exists! " <<  next -> key << std::endl;
+>>>>>>> ae452217feb18f8ca9f322da833930a18c289a21
                 return;
                 }
             }
@@ -77,14 +81,12 @@ void BST<key_type,value_type>::Better_BalancedTree(int b1, int e1, int b2, int e
     if (b1 <= e1){
     
     int mid1 = (b1 + e1)/2;
-    int mid2 = (b2 + e2)/2;
     
     insert((array[mid1]).first, (array[mid1]).second);
-    insert((array[mid2]).first, (array[mid2]).second);
     Better_BalancedTree(b1, mid1 -1, mid1 +1, e1, array);
     
     };
-    if (b2 <= e2){
+    if (b2 <= e2 && b2 != b1){
     
     int mid2 = (b2 + e2)/2;
     
@@ -159,6 +161,7 @@ void BST<key_type,value_type>::balance(){
     for ( ; it != it_end; ++it){
         arr.push_back(*it);
         dim = dim + 1;
+        std::cout << (arr[dim]).first << " " << dim << std::endl;
         }
         
     root.reset();
@@ -178,6 +181,8 @@ void BST<key_type,value_type>::better_balance(){
     for ( ; it != it_end; ++it){
         arr.push_back(*it);
         dim = dim + 1;
+        
+        std::cout << (arr[dim]).first << " " << dim << std::endl;
         }
     
     int mid = (dim)/2;

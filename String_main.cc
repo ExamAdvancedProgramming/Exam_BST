@@ -17,7 +17,7 @@
 
 using namespace std;
 
-string random_string(int l, std::string charIndex = "abcdefghijklmnaoqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"){
+string random_string(int l, std::string charIndex = "abcdefghijklmnaoqrstuvwxyz"){
 int randomIndex;
 std::string rs = "";
 
@@ -35,10 +35,10 @@ return rs;
  BST<string, string> Tree{};
  BST<string, string> Tree2{};
  BST<string, string> Tree3{};
- int nb = 10000;
- int nB = 100000;
+ int nb = 100000;
+ int nB = 500000;
  int nBB = 1000000;
- int l = 7;
+ int l = 4;
  
  std::clock_t start1;
 
@@ -55,7 +55,7 @@ return rs;
  
  
  for(int i = 0; i < nb; i++){
- Tree.insert(random_string(l), "aaaaaaaa");
+ Tree.insert(random_string(l), "aaaa");
  
  }
  
@@ -73,7 +73,7 @@ return rs;
  
  //Tree of 10000 elements
  for(int i = 0; i < nB; i++){
- Tree2.insert(random_string(l), "aaaaaaaa");
+ Tree2.insert(random_string(l), "aaaa");
  }
  
  start2 = clock();
@@ -89,12 +89,12 @@ return rs;
  
  //Tree of 1000000 elements
  for(int i = 0; i < nBB; i++){
- Tree2.insert(random_string(l), "aaaaaaaa");
+ Tree3.insert(random_string(l), "aaaa");
  }
  
  start3 = clock();
  
- for(int i = 0; i < nB; i++){
+ for(int i = 0; i < nBB; i++){
  Tree3.better_find(random_string(l));
  }
  
@@ -121,7 +121,7 @@ return rs;
  
    
  for(int i = 0; i < nB; i++){
- Tree.better_find(random_string(l));
+ Tree2.better_find(random_string(l));
  }
  
  duration2_bal = (clock() -start2)/ (double) CLOCKS_PER_SEC;

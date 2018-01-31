@@ -36,11 +36,16 @@ int main() {
     Tree.insert(20,19);
     Tree.insert(30,29);
     Tree.insert(16,15);
+<<<<<<< HEAD
 //<<<<<<< HEAD
+=======
+
+>>>>>>> ae452217feb18f8ca9f322da833930a18c289a21
     auto find1 = Tree.better_find(16);
     auto find2 = Tree.better_find(30);
     std::cout << "Found the keys " << (*find1).first << " and " << (*find2).first << std::endl; 
     Tree.better_find(55);
+<<<<<<< HEAD
     //std::cout << "Found the keys " << (*find1).first << " and " << (*find2).second << std::endl;
 //=======
     /*auto find1 = Tree.find(16);
@@ -51,6 +56,11 @@ int main() {
     Tree.last();
     */
 //>>>>>>> 930b9bb4607eef2c03a4bad2d4b397dd1ac23b69
+=======
+  
+    Tree.last();
+
+>>>>>>> ae452217feb18f8ca9f322da833930a18c289a21
     Tree.print();
     Tree.better_balance();
     std::cout << "               " << std::endl;

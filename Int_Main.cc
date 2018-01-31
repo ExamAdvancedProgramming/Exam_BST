@@ -24,11 +24,11 @@ int main() {
     BST<int, int> Treeb{};
     //Tree.print();           //expected empty
     
-    int nb = 1000;
-    int nB = 10000;
+    int nb = 100000;
+    int nB = 500000;
     int nBB = 1000000;
     
-    /*for (int i=0; i<nb; i++){
+    for (int i=0; i<nb; i++){
         Treeb.insert(rand(),1);
      }
     
@@ -38,18 +38,15 @@ int main() {
     for (int i=0; i<nB; i++){
         TreeB.insert(rand(),1);
     }
-    */
+    
     
     BST<int, int> TreeBB{};
     
     for (int i=0; i<nBB; i++){
-        int r = rand();
-        TreeBB.insert(r,1);
-        std::cout << i << " " << r << std::endl; 
+        TreeBB.insert(rand(),1);
     }
     
-    /*
-
+    
     /// CHECKING THE TIME TO FIND THE WANTED NODES ON THE NON-BALANCED TREES ///
     
     std::clock_t startb;
@@ -90,6 +87,8 @@ int main() {
     TreeB.better_balance();
     
     TreeBB.better_balance();
+    
+    
     /// CHECKING THE TIME TO FIND THE WANTED NODES ON THE BALANCED TREES ///
     
     std::clock_t Bal_startb;
@@ -134,5 +133,6 @@ int main() {
     
     std::cout<<"Comparison between times: log(n)/log(N) = " << log10(nb)/log10(nB) << ";  " << "Tb/TB = "<< Bal_durationb/Bal_durationB << "." << std::endl;
     
-    */
+
+
     }
