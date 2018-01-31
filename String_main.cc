@@ -21,7 +21,7 @@ string random_string(int l, std::string charIndex = "abcdefghijklmnaoqrstuvwxyz"
 int randomIndex;
 std::string rs = "";
 
-for (uint i = 0; i < l; ++i) {
+for (int i = 0; i < l; ++i) {
     randomIndex = rand() % charIndex.length();
     rs += charIndex[randomIndex];
 }

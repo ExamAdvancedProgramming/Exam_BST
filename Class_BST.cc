@@ -115,14 +115,13 @@ class BST {
             
 Iterator better_find(const key_type k){
 Node* next = root.get(); 
-Node* temp = root.get(); 
 if (root == nullptr){
     
         return Iterator{nullptr}; 
         }
     else {
         
-        while(next != nullptr && k != next -> key ){
+        while(next != nullptr &&k != next -> key){
             if(k < next -> key){
                 next = next -> left.get();
                 }

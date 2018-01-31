@@ -19,11 +19,8 @@ void BST<key_type,value_type>::insert(const key_type k, const value_type v){
                 next = next -> right.get();
                 }
             else {
-<<<<<<< HEAD
-                std::cout << "Node" << next -> key << "already exists"<< std::endl;
-=======
-                std::cout << "This node exists! " <<  next -> key << std::endl;
->>>>>>> ae452217feb18f8ca9f322da833930a18c289a21
+                std::cout << "Node " << next -> key << " already exists"<< std::endl;
+               
                 return;
                 }
             }
