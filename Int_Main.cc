@@ -24,8 +24,8 @@ int main() {
     BST<int, int> Treeb{};
     //Tree.print();           //expected empty
     
-    int nb = 1000;
-    int nB = 10000;
+    int nb = 1;
+    int nB = 1;
     int nBB = 1000000;
     
     /*for (int i=0; i<nb; i++){
@@ -43,11 +43,19 @@ int main() {
     BST<int, int> TreeBB{};
     
     for (int i=0; i<nBB; i++){
-        int r = rand();
-        TreeBB.insert(r,1);
-        std::cout << i << " " << r << std::endl; 
+        TreeBB.insert(rand(),1);
     }
     
+    
+    std::clock_t startbal;
+    double durationbal;
+    startbal = std::clock();
+
+    TreeBB.better_balance();
+
+    durationbal = ( std::clock() - startbal ) / (double) CLOCKS_PER_SEC;
+    
+    std::cout << durationbal << "is the time needed to balance the TreeBB" << std::endl;
     /*
 
     /// CHECKING THE TIME TO FIND THE WANTED NODES ON THE NON-BALANCED TREES ///
