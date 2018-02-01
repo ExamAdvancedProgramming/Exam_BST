@@ -24,9 +24,9 @@ int main() {
     BST<int, int> Treeb{};
     //Tree.print();           //expected empty
     
-    int nb = 100000;
-    int nB = 500000;
-    int nBB = 1000000;
+    int nb = 1000000;
+    int nB = 5000000;
+    int nBB = 10000000;
     
     for (int i=0; i<nb; i++){
         Treeb.insert(rand(),1);
@@ -72,7 +72,7 @@ int main() {
     
     std::clock_t startBB;
     double durationBB;
-    startB = std::clock();
+    startBB = std::clock();
 
         for (int i=0; i<nBB; i++){
             TreeBB.better_find(rand());
