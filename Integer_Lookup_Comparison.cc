@@ -24,17 +24,11 @@ int main() {
     BST<int, int> Treeb{};
     //Tree.print();           //expected empty
     
-<<<<<<< HEAD:Integer_Lookup_Comparison.cc
     int nb = 100000;
     int nB = 1;
     int nBB = 1;
     int nBBB = 1;
     
-=======
-    int nb = 1000000;
-    int nB = 5000000;
-    int nBB = 10000000;
->>>>>>> 2c63d18c625b25af557107202ed424b402b39cb3:Int_Main.cc
     
     for (int i=0; i<nb; i++){
         Treeb.insert(rand(),1);

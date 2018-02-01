@@ -43,10 +43,7 @@ class BST {
         void better_balance();
         void erase();
         
-<<<<<<< HEAD
-=======
         void BalancedTree(std::vector<std::pair<key_type, value_type>> array,int dim);
->>>>>>> 2c63d18c625b25af557107202ed424b402b39cb3
         void Better_BalancedTree(int b1, int e1, int b2, int e2, const std::vector<std::pair<key_type, value_type>>& array);
   
         void CopyNode(Node* new_node, Node* old_node){

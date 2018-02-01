@@ -1,10 +1,10 @@
 template < typename key_type, typename value_type>
 void BST<key_type,value_type>::insert(const key_type k, const value_type v){
     
-    
     Node* temp {nullptr};
     if (root == nullptr){
         root.reset(new Node{k,v});
+        std::cout << "New root node key " << root -> key << std::endl;
         return; 
         }
     else {
@@ -19,7 +19,7 @@ void BST<key_type,value_type>::insert(const key_type k, const value_type v){
                 next = next -> right.get();
                 }
             else {
-                std::cout << "Node " << k << " already exists"<< std::endl;
+                std::cout << "Node " << next -> key << " already exists"<< std::endl;
                
                 return;
                 }
@@ -27,11 +27,11 @@ void BST<key_type,value_type>::insert(const key_type k, const value_type v){
         }
     if (k < temp -> key){
         temp -> left.reset(new Node{k,v, temp});
-        std::cout << "Node left " << std::endl;
+        std::cout << "New left node key " << temp -> left -> key << std::endl;
         }
     else{
         temp -> right.reset(new Node{k,v, temp -> parent});
-        std::cout << "Node right "  << std::endl;
+        std::cout << "New right node key " << temp -> right -> key << std::endl;
         } 
     return;
     };
@@ -73,11 +73,7 @@ void BST<key_type, value_type>::clear() {
 
 
 template < typename key_type, typename value_type>
-<<<<<<< HEAD
-void BST<key_type,value_type>::Better_BalancedTree(int b1, int e1, int b2, int e2, const std::vector<std::pair<key_type, value_type>>& array){
-=======
 void BST<key_type,value_type>::Better_BalancedTree(int b1, int e1, int b2, int e2, const std::vector<std::pair<key_type, value_type>> &array){
->>>>>>> 2c63d18c625b25af557107202ed424b402b39cb3
     
     if (b1 <= e1){
     
@@ -99,6 +95,77 @@ void BST<key_type,value_type>::Better_BalancedTree(int b1, int e1, int b2, int e
 }
 
 
+template < typename key_type, typename value_type>
+void BST<key_type,value_type>::BalancedTree(std::vector<std::pair<key_type, value_type>> array,int dim){
+    
+    int mid {0};
+    std::vector<int> indicator {};
+    
+    for (int i = 0; i != dim; ++i){
+        indicator.push_back(1);
+        };
+    
+    indicator.push_back(0);
+    int sum_indicator = 1;
+    std::vector<int> finder {};
+    finder.push_back(1);
+    finder.push_back(0);
+    std::vector<int> indicatorjj1 {};
+    indicatorjj1.push_back(0);
+    indicatorjj1.push_back(0);
+    
+    while(sum_indicator!=0){
+        int b{0};
+        int e{0};
+        int i{0};
+        int j{0};
+        while (indicator[i]==0){
+            b++;
+            i++;
+            };
+        while (indicatorjj1 != finder){
+            e++;
+            j++;            
+            indicatorjj1[0] = indicator[j];
+            indicatorjj1[1] = indicator[j+1];
+            };
+        
+        indicatorjj1[0] = 0;
+        indicatorjj1[1] = 0;
+        
+        mid = (b+e)/2;
+        indicator[mid] = 0;
+        sum_indicator = std::accumulate(indicator.begin(), indicator.end(), 0);
+        insert((array[mid]).first,(array[mid]).second);
+        };
+    finder.clear();
+    indicator.clear();
+    indicatorjj1.clear();
+    }
+
+
+
+
+
+
+template < typename key_type, typename value_type>
+void BST<key_type,value_type>::balance(){
+    std::vector<std::pair<key_type, value_type>> arr {};
+    auto it {this->cbegin()};
+    auto it_end{this->cend()};
+    int dim = 0;
+    
+    for ( ; it != it_end; ++it){
+        arr.push_back(*it);
+        dim = dim + 1;
+        std::cout << (arr[dim]).first << " " << dim << std::endl;
+        }
+        
+    root.reset();
+    BalancedTree(arr, dim);
+
+    
+    }   
     
     
 template < typename key_type, typename value_type>
@@ -111,23 +178,14 @@ void BST<key_type,value_type>::better_balance(){
     for ( ; it != it_end; ++it){
         arr.push_back(*it);
         dim = dim + 1;
-<<<<<<< HEAD
-=======
         
        // std::cout << (arr[dim]).first << " " << dim << std::endl;
->>>>>>> 2c63d18c625b25af557107202ed424b402b39cb3
         }
     
     int mid = (dim)/2;
     root.reset();
     insert((arr[mid]).first, (arr[mid]).second);
-    
-    std::cout << "Start Balancing..." << std::endl;
-    
     Better_BalancedTree(0, mid -1, mid +1, dim, arr);
 
     
     }  
-
-   
-
