@@ -25,9 +25,9 @@ int main() {
     //Tree.print();           //expected empty
     
     int nb = 100000;
-    int nB = 1000000;
-    int nBB = 5000000;
-    int nBBB = 10000000;
+    int nB = 1;
+    int nBB = 1;
+    int nBBB = 1;
     
     
     for (int i=0; i<nb; i++){

@@ -120,7 +120,7 @@ class BST {
                 }
                 else {
         
-                    while(next != nullptr &&k != next -> key){
+                    while(next != nullptr && k != next -> key){
                         if(k < next -> key){
                             next = next -> left.get();
                         }
