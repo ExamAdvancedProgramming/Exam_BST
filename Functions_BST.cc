@@ -73,7 +73,11 @@ void BST<key_type, value_type>::clear() {
 
 
 template < typename key_type, typename value_type>
+<<<<<<< HEAD
 void BST<key_type,value_type>::Better_BalancedTree(int b1, int e1, int b2, int e2, const std::vector<std::pair<key_type, value_type>>& array){
+=======
+void BST<key_type,value_type>::Better_BalancedTree(int b1, int e1, int b2, int e2, const std::vector<std::pair<key_type, value_type>> &array){
+>>>>>>> 2c63d18c625b25af557107202ed424b402b39cb3
     
     if (b1 <= e1){
     
@@ -107,6 +111,11 @@ void BST<key_type,value_type>::better_balance(){
     for ( ; it != it_end; ++it){
         arr.push_back(*it);
         dim = dim + 1;
+<<<<<<< HEAD
+=======
+        
+       // std::cout << (arr[dim]).first << " " << dim << std::endl;
+>>>>>>> 2c63d18c625b25af557107202ed424b402b39cb3
         }
     
     int mid = (dim)/2;
