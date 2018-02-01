@@ -38,7 +38,7 @@ return rs;
  int nb = 100000;
  int nB = 500000;
  int nBB = 1000000;
- int l = 4;
+ int l = 6;
  
  std::clock_t start1;
 

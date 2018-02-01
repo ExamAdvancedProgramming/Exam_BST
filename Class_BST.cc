@@ -43,8 +43,7 @@ class BST {
         void better_balance();
         void erase();
         
-        void BalancedTree(std::vector<std::pair<key_type, value_type>> array,int dim);
-        void Better_BalancedTree(int b1, int e1, int b2, int e2, std::vector<std::pair<key_type, value_type>> array);
+        void Better_BalancedTree(int b1, int e1, int b2, int e2, const std::vector<std::pair<key_type, value_type>>& array);
   
         void CopyNode(Node* new_node, Node* old_node){
             
@@ -95,7 +94,7 @@ class BST {
       }
     
     
-        // move assignment
+        // Move - Assignment
         BST& operator=(BST<key_type, value_type>&& other){
             if (root != nullptr){
                 root.reset();
@@ -113,65 +112,61 @@ class BST {
         class Iterator;
         
             
-Iterator better_find(const key_type k){
-Node* next = root.get(); 
-if (root == nullptr){
+        Iterator better_find(const key_type k){
+            Node* next = root.get(); 
+                if (root == nullptr){
     
-        return Iterator{nullptr}; 
-        }
-    else {
+                    return Iterator{nullptr}; 
+                }
+                else {
         
-        while(next != nullptr &&k != next -> key){
-            if(k < next -> key){
-                next = next -> left.get();
+                    while(next != nullptr &&k != next -> key){
+                        if(k < next -> key){
+                            next = next -> left.get();
+                        }
+                        else if (k > next -> key){
+                            next = next -> right.get();
+                            }   
+                        }
+                    }
+                if(next == nullptr){
+                    std::cout << "Key not found!" << std::endl;
+                    return Iterator{nullptr}; 
                 }
-            else if (k > next -> key){
-                next = next -> right.get();
-                }
-      
+                return Iterator{next};
             }
-        }
-    if(next == nullptr){
-    std::cout << "Key not found!" << std::endl;
-    return Iterator{nullptr}; 
-    }
-    return Iterator{next};
-    }
   
-            Iterator begin() {
+       Iterator begin() {
         
-                Node* first_key = root.get();
+            Node* first_key = root.get();
         
-                while(first_key -> left.get()){
-                    first_key = first_key -> left.get();
+            while(first_key -> left.get()){
+                 first_key = first_key -> left.get();
                 };
         
                 return Iterator{first_key};
             }
   
-            Iterator end() { return Iterator{nullptr};} 
+       Iterator end() { return Iterator{nullptr};} 
         
         
-            Iterator find(key_type key) const{
-                auto it {this -> cbegin()};
-                auto it_end {this -> cend()};
+       Iterator find(key_type key) const{
+            auto it {this -> cbegin()};
+            auto it_end {this -> cend()};
         
-                for (; it != it_end; ++it){
-                    key_type comp = (*it).first;
+            for (; it != it_end; ++it){
+                key_type comp = (*it).first;
                     
-                    if (comp == key ){
-                         return it;
-                        }
-                    }
-                    std::cout << "The key " << key << " is not in the tree..." << std::endl;
-                    return it_end;
-                }
+                if (comp == key ){
+                     return it;
+                     }
+                 }
+            std::cout << "The key " << key << " is not in the tree..." << std::endl;
+            return it_end;
+            
+            }
              
-            //////////////////////////// FACCIAMO //////////////////////////////
-
-            value_type& operator[](key_type const &k) {
-        //ritorna una reference al valore relativo alla key 
-            };
+            
         
 
         class ConstIterator;
