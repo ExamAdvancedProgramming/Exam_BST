@@ -24,11 +24,17 @@ int main() {
     BST<int, int> Treeb{};
     //Tree.print();           //expected empty
     
+<<<<<<< HEAD
     int nb = 100000;
     int nB = 1000000;
     int nBB = 5000000;
     int nBBB = 10000000;
     
+=======
+    int nb = 1000000;
+    int nB = 5000000;
+    int nBB = 10000000;
+>>>>>>> 2c63d18c625b25af557107202ed424b402b39cb3
     
     for (int i=0; i<nb; i++){
         Treeb.insert(rand(),1);
