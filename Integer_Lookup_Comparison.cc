@@ -51,7 +51,7 @@ int main() {
     BST<int, int> TreeBBB{};
     
     for (int i=0; i<nBBB; i++){
-        TreeBB.insert(rand(),1);
+        TreeBBB.insert(rand(),1);
     }
     
     /// CHECKING THE TIME TO FIND THE WANTED NODES ON THE NON-BALANCED TREES ///
