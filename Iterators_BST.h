@@ -1,3 +1,6 @@
+#ifndef ITERATORSBST
+#define ITERATORSBST
+
 template < typename key_type, typename value_type>
 
 class BST<key_type, value_type>::Iterator {
@@ -43,3 +46,5 @@ class BST<key_type,value_type> ::ConstIterator : public BST<key_type,value_type>
      public:
         using parent::Iterator;
     };
+    
+#endif
