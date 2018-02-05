@@ -1,16 +1,16 @@
+#include <fstream>
+#include <ctime>
 #include <iostream>
-#include <memory>
-#include <utility>
+#include <string>
 #include <vector>
 #include <numeric>
-#include <ctime>
 #include <math.h>
 
 // Files needed
 
-#include "Class_BST.cc"
-#include "Iterators_BST.cc"
-#include "Functions_BST.cc"
+#include "Class_BST.h"
+#include "Iterators_BST.h"
+#include "Functions_BST.h"
 
 
 
@@ -24,10 +24,12 @@ int main() {
     BST<int, int> Treeb{};
     //Tree.print();           //expected empty
     
-    int nb = 100000;
-    int nB = 1;
-    int nBB = 1;
-    int nBBB = 1;
+    int nb = 1000000;
+    int nB = 10000000;
+    int nBB = 20000000;
+    int nBBB = 50000000;
+    int nBBBB = 100000000;
+ 
     
     
     for (int i=0; i<nb; i++){
@@ -52,6 +54,13 @@ int main() {
     
     for (int i=0; i<nBBB; i++){
         TreeBBB.insert(rand(),1);
+    }
+    
+    
+    BST<int, int> TreeBBBB{};
+    
+    for (int i=0; i<nBBBB; i++){
+        TreeBBBB.insert(rand(),1);
     }
     
     /// CHECKING THE TIME TO FIND THE WANTED NODES ON THE NON-BALANCED TREES ///
@@ -97,6 +106,16 @@ int main() {
 
     durationBBB = ( std::clock() - startBBB ) / (double) CLOCKS_PER_SEC;
     
+    std::clock_t startBBBB;
+    double durationBBBB;
+    startBBBB = std::clock();
+
+        for (int i=0; i<nBBBB; i++){
+            TreeBBBB.better_find(rand());
+        }
+
+    durationBBBB = ( std::clock() - startBBBB ) / (double) CLOCKS_PER_SEC;
+    
     /// BALANCING THE TREES ///
     
     Treeb.better_balance();
@@ -106,6 +125,8 @@ int main() {
     TreeBB.better_balance();
     
     TreeBBB.better_balance();
+    
+    TreeBBBB.better_balance();
     
     
     /// CHECKING THE TIME TO FIND THE WANTED NODES ON THE BALANCED TREES ///
@@ -151,12 +172,51 @@ int main() {
 
     Bal_durationBBB = ( std::clock() - Bal_startBBB ) / (double) CLOCKS_PER_SEC;
     
+    std::clock_t Bal_startBBBB;
+    double Bal_durationBBBB;
+    Bal_startBBBB = std::clock();
+
+        for (int i=0; i<nBBBB; i++){
+            TreeBBBB.better_find(rand());
+        }
+
+    Bal_durationBBBB = ( std::clock() - Bal_startBBBB ) / (double) CLOCKS_PER_SEC;
+    
+    
+    std::vector<double> v;
+    
+    v.push_back(durationb/nb);
+    v.push_back(durationB/nB);
+    v.push_back(durationBB/nBB);
+    v.push_back(durationBBB/nBBB);
+    v.push_back(durationBBBB/nBBBB);
+    
+    v.push_back(Bal_durationb/nb);
+    v.push_back(Bal_durationB/nB);
+    v.push_back(Bal_durationBB/nBB);
+    v.push_back(Bal_durationBBB/nBBB);
+    v.push_back(Bal_durationBBBB/nBBBB);
+
+
+std::ofstream outFile("Integer_comparison.txt");
+    // the important part
+    for (const auto &e : v) outFile << e << "\n";
+    outFile << nb << "\n";
+    outFile << nB << "\n";
+    outFile << nBB << "\n";
+    outFile << nBBB << "\n";
+    outFile << nBBBB << "\n";
+    
+    
+    
+    
     /// PRINTING THE RESULTS
     
     std::cout<<"Spent time for finding in b: "<< durationb <<std::endl;
     std::cout<<"Spent time for finding in B: "<< durationB <<std::endl;
     std::cout<<"Spent time for finding in BB: "<< durationBB <<std::endl;
     std::cout<<"Spent time for finding in BBB: "<< durationBBB <<std::endl;
+    std::cout<<"Spent time for finding in BBB: "<< durationBBBB <<std::endl;
     std::cout<<"Spent time for finding in balanced b: "<< Bal_durationb <<std::endl;
     std::cout<<"Spent time for finding in balanced B: "<< Bal_durationB <<std::endl;
     std::cout<<"Spent time for finding in balanced BB: "<< Bal_durationBB <<std::endl;

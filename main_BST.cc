@@ -6,9 +6,9 @@
 
 // Files needed
 
-#include "Class_BST.cc"
-#include "Iterators_BST.cc"
-#include "Functions_BST.cc"
+#include "Class_BST.h"
+#include "Iterators_BST.h"
+#include "Functions_BST.h"
 
 
 

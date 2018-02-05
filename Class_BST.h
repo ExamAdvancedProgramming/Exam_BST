@@ -1,6 +1,9 @@
-#include <iostream>
 #include <memory>
-#include <utility>
+
+
+
+#ifndef CLASSBST
+#define CLASSBST
 
 
 template < typename key_type, typename value_type>
@@ -201,4 +204,7 @@ class BST {
                 }
        
 };
+
+
+#endif
 
