@@ -27,7 +27,7 @@ The tree has the following functions:
 - `cbegin()`: a `const_iterator` to the first node is returned in order to only read the tree;
 - `cend()`: returns a proper null-pointer `const-iterator`;
 - `better_balance()`: it returns the root to a balanced tree. It is obtained by saving all the couples into a key-ordered vector and then inserting all the elements by the use of a recoursive function that takes mid-points of each sub-vector;
-- `find(key)`: finds a given key and return an iterator to that node. If the key is not found returns `end()`.
+- `find(key)`: finds a given key and returns an iterator to that node. If the key is not found, a message `Key not found` is printed and then `end()` is returned.
       
 ![](./.aux/binary.png)
 
