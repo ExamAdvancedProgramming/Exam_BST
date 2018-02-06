@@ -9,10 +9,13 @@
 #include "Class_BST.h"
 #include "Iterators_BST.h"
 #include "Functions_BST.h"
+#include "Try.h"
 
 
 
 int main() {
+
+    
     
     BST<int, int> TreeBB{};
     TreeBB.insert(2,2);
