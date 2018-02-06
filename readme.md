@@ -1,42 +1,41 @@
-# C++ part
+# BINARY SEARCH TREE
 
-### What you have to submit
+### What we have submitted
+We have implemented the following files:
 
-- You have to upload only and all the **source files** you wrote, with a
-**Makefile** (or **CMakeLists.txt**) and a **readme.md** file where you describe how to compile, run your code and a short report on what you have done and understood.
+- **Class_BST.h** : here the class is implemented. 
+- **Iterators_BST.h**: in this file you could find the algorithm for the iterator and some of its functions.
+- **Functions_BST.h**: where some functions of the class are included.
+- **Main_BST.cc**: where all the functions have been tested.
+- **Integer_Lookup_comparison**: here the performance of the look-up strategy is checked on an *itegers* balanced BST.
+- **String_Lookup_comparison**: here the performance of the look-up strategy is checked on an *strings* balanced BST.
 
-- your code should have no memory leaks. You can check running
-```
-$ valgrind ./a.out ...
-```
-where the `...` means possible additional command line arguments, if any.
+### Checking the code
+The Main_BST.cc has been checked successfully through `$valgrid`command and with the flags -Wall -Wextra.
+We have also checked that the look-ups behave as `O(log N)` in balanced trees.
 
-- your code must be compiled with the flags `-Wall -Wextra` and no warnings must appear
+IMMAGINI
 
+### Functions Implemented
+The tree has the following functions:
 
-## Binary search tree
-
-In this exam you are required to implement a **template** binary search tree (BST). A BST, is a hierarchical (ordered) data structure where each **node** can have at most two children, namely, **left** and **right** child. Each node stores a **pair** of a **key** and the associated **value**. The binary tree is ordered according to the keys. Given a node `N`, all the nodes having keys **smaller** than the key of the node `N` can be found going **left**. While all the nodes with a key **greater** than the key of the node `N` can be reached going **right**.
+      1. `insert (key, value)`: if the tree is empty, it creates a new pair key-value root. Otherwise, it appends a new key-value        
+      node according to the comparison procedure. If the key value already exists, nothing happens.
+      2. `print`,  used to print `key: value` of each node. Note that the output should be in order with respect to the keys.
+      3. `clear()`, clear the content of the tree.
+      4. `begin()`, return an `iterator` to the first node (which likely will not be the root node)
+      5. `end()`, return a proper `iterator`
+      6. `cbegin()`, return a `const_iterator` to the first node
+      7. `cend()`, return a proper `const_iterator`
+      8. `balance()`, balance the tree.
+      9. `find`, find a given key and return an iterator to that node. If the key is not found returns `end()`;
+      9. **optional** `erase`, delete the node with the given key.
+      10. **optional** implement the `value_type& operator[](const key_type& k)` function int the `const` and `non-const` versions). This functions, should return a reference to the value associated to the key `k`. If the key is not present, a new node with key `k` is allocated having the value `value_type{}`. 
 
 ![](./.aux/binary.png)
 
 
-Practically speaking, given the binary tree in the picture, if you need to insert a new node with key=5, you start from the root node `8`, you go left since `5<8`, you reach node `3`, then you go right, you land in `6`, you go left reaching node `4`. Node `4` has no right child, so the new node `5` will be the right child of node `4`. If a key is already present in the tree, you can choose if replace the value with the newest one, or leave the things as they are.
 
-From the implementation point of view, you node has two pointers `left` and `right` pointing to the left and right child respectively. The pointers points to `nullptr` if they have no children.
-
-It is useful to add an additional pointer (head, root, whatever you like) pointing to the first node, called **root node**.
-
-### Tree traversal
-
-The tree must be traversed in order, i.e., if I "print" the tree in the picture, I expect to see on the screen the sequence
-```
-1 3 4 6 7 8 10 13 14
-```
-node `1` is the first node, and node `14` is the last one.
-
-### Assignments
-You have to solve the following tasks in C++11 (C++14 and 17 are welcomed as well).
 
   - implement a **template** binary search tree
     - it must be templated on the type of the key and the type of the value associated with it.
