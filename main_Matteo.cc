@@ -23,10 +23,10 @@ int main() {
     //Tree.print();           //expected empty
     std::vector<int> keysb{};
     std::vector<int> keysB{};
-    int nb = 1000;
-    int nB = 10000;
+    int nb = 100;
+    int nB = 1000;
     
-    for (int i=0; i<1000; i++){
+    for (int i=0; i<nb; i++){
         int r1 = rand();
         Treeb.insert(r1,rand());
         if (i%5 == 0){
@@ -36,7 +36,7 @@ int main() {
 
     BST<int, int> TreeB{};
     
-    for (int i=0; i<10000; i++){
+    for (int i=0; i<nB; i++){
         int r1 = rand();
         TreeB.insert(r1,rand());
         if (i%50 == 0){
@@ -50,8 +50,8 @@ int main() {
     double durationb;
     startb = std::clock();
 
-        for (int i=0; i<200; i++){
-            Treeb.find(keysb[i]);
+        for (int i=0; i<20; i++){
+            Treeb.better_find(keysb[i]);
         } 
 
     durationb = ( std::clock() - startb ) / (double) CLOCKS_PER_SEC;
@@ -60,17 +60,17 @@ int main() {
     double durationB;
     startB = std::clock();
 
-        for (int i=0; i<200; i++){
-            TreeB.find(keysB[i]);
+        for (int i=0; i<20; i++){
+            TreeB.better_find(keysB[i]);
         }
 
     durationB = ( std::clock() - startB ) / (double) CLOCKS_PER_SEC;
     
     /// BALANCING THE TREES ///
     
-    Treeb.better_balance();
+    Treeb.balance();
     
-    TreeB.better_balance();
+    TreeB.balance();
     
     /// CHECKING THE TIME TO FIND THE WANTED NODES ON THE BALANCED TREES ///
     
@@ -78,8 +78,8 @@ int main() {
     double Bal_durationb;
     Bal_startb = std::clock();
 
-        for (int i=0; i<200; i++){
-            Treeb.find(keysb[i]);
+        for (int i=0; i<20; i++){
+            Treeb.better_find(keysb[i]);
         }
 
     Bal_durationb = ( std::clock() - Bal_startb ) / (double) CLOCKS_PER_SEC;
@@ -88,8 +88,8 @@ int main() {
     double Bal_durationB;
     Bal_startB = std::clock();
 
-        for (int i=0; i<200; i++){
-            TreeB.find(keysB[i]);
+        for (int i=0; i<20; i++){
+            TreeB.better_find(keysB[i]);
         }
 
     Bal_durationB = ( std::clock() - Bal_startB ) / (double) CLOCKS_PER_SEC;
