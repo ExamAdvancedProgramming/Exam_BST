@@ -6,6 +6,12 @@
 #define CLASSBST
 
 
+#include <iostream>
+#include <memory>
+#include <utility>
+#include <vector>
+#include <numeric>
+
 template < typename key_type, typename value_type>
 class BST {
   

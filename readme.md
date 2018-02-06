@@ -1,4 +1,4 @@
-# C++ part
+# Binary Search Tree
 
 ### What you have to submit
 

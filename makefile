@@ -1,13 +1,14 @@
-CC=g++
-CFLAGS=-std=c++11 -Wall -Wextra
-SOURCES=main_BST.cpp
-OBJECTS=$(SOURCES:.cpp=.o)
-EXECUTABLE=Try
+HEADERS = Class_BST.h Iterators.h Functions.h
+OBJECTS = main_BST.o
 
-all: $(SOURCES) $(EXECUTABLE)
-    
-$(EXECUTABLE): $(OBJECTS) 
-	$(CC) $(OBJECTS) -o $@
+default: main_BST
 
-.cpp.o:
-	$(CC) $(CFLAGS) $< -o $@
+%.o: %.c $(HEADERS)
+	g++ -std=c++11 $< -o $@
+
+program: $(OBJECTS)
+	g++ -std=c++11 $(OBJECTS) -o $@
+
+clean:
+	-rm -f $(OBJECTS)
+	-rm -f main_BST
