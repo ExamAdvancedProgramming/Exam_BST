@@ -1,44 +1,28 @@
-#include <memory>
-
-
-
 #ifndef CLASSBST
 #define CLASSBST
 
-
-#include <iostream>
-#include <memory>
-#include <utility>
-#include <vector>
-#include <numeric>
 
 template < typename key_type, typename value_type>
 class BST {
   
     private:
+    
+    
         struct Node {
         
             key_type key;
             value_type value;
         
-            Node* parent;
+            Node* parent; //needed for Iterator
         
             std::unique_ptr<Node> left;
             std::unique_ptr<Node> right;
         
             Node(const key_type  k, const value_type  v, Node* p = nullptr) : key{k}, value{v}, parent{p}, left{nullptr}, right{nullptr} {}
     
-            // copy-constructor for the node
-            
-            Node(const Node& other) {
-                value = other.value;
-                key = other.key;
-                parent = other.parent;
-                left.reset();
-                right.reset();
-                }
-        };
-  
+		};  
+        
+        
         std::unique_ptr<Node> root;
   
   
@@ -48,11 +32,13 @@ class BST {
         void insert (const key_type  k, const value_type  v);
         void print() const;
         void clear();
-        void balance();
-        void better_balance();
-        void erase();
+        void balance(); //first attempt
+        void better_balance(); //second attempt, ricursively defined
         
-        void BalancedTree(std::vector<std::pair<key_type, value_type>> array,int dim);
+        //needed for the balance()
+        void BalancedTree(std::vector<std::pair<key_type, value_type>> array,int dim); 
+        
+        //needed for the better_balance()
         void Better_BalancedTree(int b1, int e1, int b2, int e2, const std::vector<std::pair<key_type, value_type>>& array);
   
         void CopyNode(Node* new_node, Node* old_node){

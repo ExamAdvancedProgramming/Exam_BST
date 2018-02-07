@@ -45,7 +45,8 @@ int main() {
     std::cout << "Found the keys " << (*find1).first << " and " << (*find2).first << std::endl; 
     Tree.better_find(55);
   
-    Tree.last();
+    Tree.last(); // expected last key:30  and last value:29
+
 
     Tree.print();
     Tree.better_balance();
