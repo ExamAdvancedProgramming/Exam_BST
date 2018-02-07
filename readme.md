@@ -9,12 +9,13 @@ We have implemented the following files:
 - **Main_BST.cc**: where all the functions have been tested.
 - **Integer_Lookup_comparison.cc**: here the performance of the look-up strategy is checked on an *itegers* balanced BST.It also returns a text file named Integer_comparison.txt where a vector containing the results of the comparison is stored. 
 - **String_Lookup_comparison.cc**: here the performance of the look-up strategy is checked on an *strings* balanced BST.It also returns a text file named String_comparison.txt where a vector containing the results of the comparison is stored.
+- **png files** : two png files are contained in the folder. In each of them, the behaviour of searching times is reported and it is very close to log(n) as you can see in the "Checking the code" section.
 
 ### Checking the code
 The Main_BST.cc has been checked successfully through `$valgrid`command and with the flags -Wall -Wextra.
 We have also checked that the look-ups behave as `O(log N)` in balanced trees.
 
-IMMAGINI
+![](gatto.png)
 
 ### Functions Implemented
 The tree has the following functions:
@@ -37,7 +38,7 @@ There are three diffent ways to compile the codes:
 - digit`make integer` to run Integer_Lookup_comparison.cc;
 - digit`make string` to run String_Lookup_comparison.cc.
 
-![](gatto.png)
+
 
 
 
