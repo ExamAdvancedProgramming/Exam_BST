@@ -1,7 +1,6 @@
 #ifndef FUNCTIONSBST
 #define FUNCTIONSBST
 
-
 template < typename key_type, typename value_type>
 void BST<key_type,value_type>::insert(const key_type k, const value_type v){
     
