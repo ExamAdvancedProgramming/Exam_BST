@@ -39,11 +39,11 @@ return rs;
  BST<string, string> Tree5{};
  
  
- int nb = 1000000;
- int nB = 10000000;
- int nBB = 20000000;
- int nBBB = 50000000;
- int nBBBB = 100000000;
+ int nb = 10000;
+ int nB = 100000;
+ int nBB = 1000000;
+ int nBBB = 10000000;
+ int nBBBB = 50000000;
  
  int l = 6;
  
