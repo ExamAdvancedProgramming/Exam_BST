@@ -12,7 +12,10 @@
 
 
 
+
 int main() {
+
+    
     
     BST<int, int> TreeBB{};
     TreeBB.insert(2,2);
@@ -42,7 +45,8 @@ int main() {
     std::cout << "Found the keys " << (*find1).first << " and " << (*find2).first << std::endl; 
     Tree.better_find(55);
   
-    Tree.last();
+    Tree.last(); // expected last key:30  and last value:29
+
 
     Tree.print();
     Tree.better_balance();
@@ -81,10 +85,12 @@ int main() {
     
     Tree.print();
     
+ 
+ 	std::cout << "               " << std::endl;
+    std::cout << "NEW TREE IS BUILT" << std::endl;
     std::cout << "               " << std::endl;
-    std::cout << "New Tree" << std::endl;
-    std::cout << "               " << std::endl;
-    
+ 
+ 
     
     Tree_to_be_assigned.insert(5,7);
     Tree_to_be_assigned.insert(13,2);
@@ -93,7 +99,7 @@ int main() {
     Tree_short.insert(20,2);
    
     std::cout << "               " << std::endl;
-    std::cout << "Expected Tree" << std::endl;
+    std::cout << "Expected Tree copied with 55" << std::endl;
     std::cout << "               " << std::endl;
     
     Other_Tree.print();
@@ -139,11 +145,10 @@ int main() {
     
     
     Other_Tree.clear();
+    
     std::cout << "Expected empty" << std::endl;
     Other_Tree.print();
     
-    
-    std::cout << "FUNZIONA" << std::endl;
     
     };
 

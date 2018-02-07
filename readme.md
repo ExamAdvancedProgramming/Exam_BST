@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 # BINARY SEARCH TREE
+=======
+# Binary Search Tree
+>>>>>>> Sistemiamo
 
 ### What we have submitted
 We have implemented the following files:

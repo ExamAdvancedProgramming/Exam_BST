@@ -42,6 +42,9 @@ void BST<key_type,value_type>::insert(const key_type k, const value_type v){
     
 
 template <typename key_type, typename value_type>
+
+//the functions prints [key:value] from the smallest key to the largest one
+
 void BST<key_type, value_type>::print() const {
     
     if (!root){
@@ -76,6 +79,9 @@ void BST<key_type, value_type>::clear() {
 
 
 template < typename key_type, typename value_type>
+
+//ricursive function in order to balance the tree (called by better_balance())
+
 void BST<key_type,value_type>::Better_BalancedTree(int b1, int e1, int b2, int e2, const std::vector<std::pair<key_type, value_type>> &array){
     
     if (b1 <= e1){
@@ -99,6 +105,8 @@ void BST<key_type,value_type>::Better_BalancedTree(int b1, int e1, int b2, int e
 
 
 template < typename key_type, typename value_type>
+
+//  NON-RICURSIVE function that balance the tree (called by balance)
 void BST<key_type,value_type>::BalancedTree(std::vector<std::pair<key_type, value_type>> array,int dim){
     
     int mid {0};
@@ -182,9 +190,7 @@ void BST<key_type,value_type>::better_balance(){
         arr.push_back(*it);
         dim = dim + 1;
         
-       // std::cout << (arr[dim]).first << " " << dim << std::endl;
-        }
-    
+}    
     int mid = (dim)/2;
     root.reset();
     insert((arr[mid]).first, (arr[mid]).second);
