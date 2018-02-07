@@ -37,7 +37,7 @@ There are three diffent ways to compile the codes:
 - digit`make integer` to run Integer_Lookup_comparison.cc;
 - digit`make string` to run String_Lookup_comparison.cc.
 
-![Gattoooooooooooooooooooo](Gatto.png)
+![](gatto.png)
 
 
 
