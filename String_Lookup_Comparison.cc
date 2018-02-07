@@ -43,7 +43,7 @@ return rs;
  int nB = 100000;
  int nBB = 1000000;
  int nBBB = 10000000;
- int nBBBB = 50000000;
+ int nBBBB = 30000000;
  
  int l = 6;
  
@@ -203,7 +203,7 @@ start5 = clock();
  
  duration5_bal = (clock() -start5)/ (double) CLOCKS_PER_SEC;
  
- std::vector<int> v;
+ std::vector<double> v;
  
  v.push_back(duration1/nb);
  v.push_back(duration2/nB);
@@ -238,7 +238,9 @@ std::ofstream outFile("String_comparison.txt");
  std::cout << "Find in Tree1 BALANCED = " << duration1_bal << endl;
  std::cout << "Find in Tree2 BALANCED = " << duration2_bal << endl;
  std::cout << "Find in Tree3 BALANCED = " << duration3_bal << endl;
-  std::cout << "Find in Tree4 BALANCED = " << duration4_bal << endl;
+ std::cout << "Find in Tree4 BALANCED = " << duration4_bal << endl;
+ std::cout << "Find in Tree5 BALANCED = " << duration5_bal << endl;
+ 
  
  std::cout<<"Comparison between times: log(n)/log(N) = " << log10(nb)/log10(nB) << ";  " << "(Tb/nb)/(TB/nB) = "<< (duration1/nb)/(duration2/nB) << "." << std::endl;
  
