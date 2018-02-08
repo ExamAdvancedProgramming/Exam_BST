@@ -1,15 +1,28 @@
 OBJECTS = main_BST.o 
 CXXFLAGS = -g -std=c++11 -Wall -Wextra 
 CXX = g++
-PROGRAM_NAME = true_main
-PROGRAM_NAME_STR = string_main
-PROGRAM_NAME_INT = integer_main
+PROGRAM_NAME = check_main
+PROGRAM_NAME_STR = string
+PROGRAM_NAME_INT = integer
 
-$(PROGRAM_NAME) : main_BST.o 
+.PHONY : clean plot
+
+all : check_main string integer 
+
+check_main : main_BST.o 
 	$(CXX) $(CXXFLAGS) -o $(PROGRAM_NAME) $(OBJECTS) 
 	
 string : String_Lookup_Comparison.o
-	$(CXX) $(CXXFLAGS) -o $(PROGRAM_NAME_STR) String_Lookup_Comparison.o
+	rm -rf String_comparison.txt 
+	$(CXX) $(CXXFLAGS) -o $(PROGRAM_NAME_STR) String_Lookup_Comparison.o 
 	
 integer : Integer_Lookup_Comparison.o 
+	rm -rf Integer_comparison.txt 
 	$(CXX) $(CXXFLAGS) -o $(PROGRAM_NAME_INT) Integer_Lookup_Comparison.o
+	
+clean : 
+	rm -rf *.o check_main string integer
+	
+plot :
+	rm -rf *.png
+	python test_plot.py 

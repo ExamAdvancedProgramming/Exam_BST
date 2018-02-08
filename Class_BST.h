@@ -1,6 +1,6 @@
 #ifndef CLASSBST
 #define CLASSBST
-
+#include<memory>
 
 template < typename key_type, typename value_type>
 class BST {

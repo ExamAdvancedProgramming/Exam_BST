@@ -241,10 +241,6 @@ std::ofstream outFile("String_comparison.txt");
  std::cout << "Find in Tree4 BALANCED = " << duration4_bal << endl;
  std::cout << "Find in Tree5 BALANCED = " << duration5_bal << endl;
  
- 
- std::cout<<"Comparison between times: log(n)/log(N) = " << log10(nb)/log10(nB) << ";  " << "(Tb/nb)/(TB/nB) = "<< (duration1/nb)/(duration2/nB) << "." << std::endl;
- 
- 
  }
  
  
