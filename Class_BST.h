@@ -110,6 +110,21 @@ class BST {
   
         class Iterator;
         
+        // Const
+       const value_type& operator[](const key_type& k) {
+        	auto it = find(k);
+        	if (it != nullptr){
+        	return it.current -> value;
+        	}
+        	else{
+        	const value_type new_val{};
+        	insert( k, new_val);
+        	auto it = find(k);
+        	return  it.current -> value;
+        	}
+        }
+        
+        
         // it finds a key from the root  
         Iterator better_find(const key_type k){
             Node* next = root.get(); 

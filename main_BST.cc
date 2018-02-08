@@ -46,7 +46,15 @@ int main() {
     Tree.better_find(55);
   
     Tree.last(); // expected last key:30  and last value:29
-
+	
+	
+	int v = Tree[30];
+	int v1 = Tree[75];
+	
+	//expected new right node 75 and The references are 29 and 0
+	
+	std::cout << "The references are " << v << " and " << v1 << std::endl; 
+    
 
     Tree.print();
     Tree.better_balance();

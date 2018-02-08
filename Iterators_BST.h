@@ -6,9 +6,10 @@ template < typename key_type, typename value_type>
 class BST<key_type, value_type>::Iterator {
     private:
         using Node = BST<key_type, value_type>::Node;
-        Node* current;
+        
         
     public:
+    	Node* current; //needed public for operator[]
         Iterator(Node* n) : current{n} {};
         std::pair<key_type, value_type> operator*() const { return std::make_pair(current -> key, current -> value); }
 

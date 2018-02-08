@@ -22,7 +22,9 @@ int main() {
     /// CONSTRUCTION OF THE TWO DIFFERENT TREES ///
     
     BST<int, int> Treeb{};
-    //Tree.print();           //expected empty
+    
+    
+    // If you want change the dimension of the trees
     
     int nb = 10000;
     int nB = 100000;

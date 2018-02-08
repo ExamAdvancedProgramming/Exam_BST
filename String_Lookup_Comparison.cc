@@ -39,6 +39,8 @@ return rs;
  BST<string, string> Tree5{};
  
  
+ //If you want change the dimensions of the trees
+ 
  int nb = 10000;
  int nB = 100000;
  int nBB = 1000000;
