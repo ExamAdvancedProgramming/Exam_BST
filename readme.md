@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 # BINARY SEARCH TREE
-=======
-# Binary Search Tree
->>>>>>> Sistemiamo
 
 ### What we have submitted
 We have implemented the following files:
@@ -13,13 +9,14 @@ We have implemented the following files:
 - **Main_BST.cc**: where all the functions have been tested.
 - **Integer_Lookup_comparison.cc**: here the performance of the look-up strategy is checked on an *itegers* balanced BST.It also returns a text file named Integer_comparison.txt where a vector containing the results of the comparison is stored. 
 - **String_Lookup_comparison.cc**: here the performance of the look-up strategy is checked on an *strings* balanced BST.It also returns a text file named String_comparison.txt where a vector containing the results of the comparison is stored.
-- **png files** : two png files are contained in the folder. In each of them, the behaviour of searching times is reported and it is very close to log(n) as you can see in the "Checking the code" section.
+- **plots folder** : two png files are contained in the folder. In each of them, the behaviour of searching times is reported and it is very close to log(n) as you can see in the "Checking the code" section.
 
 ### Checking the code
 The Main_BST.cc has been checked successfully through `$valgrid`command and with the flags -Wall -Wextra.
 We have also checked that the look-ups behave as `O(log N)` in balanced trees.
 
-![](gatto.png)
+![](plots/String_plot.png)
+![](plots/Integer_plot.png)
 
 ### Functions Implemented
 The tree has the following functions:
@@ -40,9 +37,12 @@ The tree has the following functions:
 
 There are three diffent ways to compile the codes:
 
-- digit`make` to run main_BST.cc;
-- digit`make integer` to run Integer_Lookup_comparison.cc;
-- digit`make string` to run String_Lookup_comparison.cc.
+- digit `make` to run main_BST.cc, Integer_Lookup_comparison.cc and String_Lookup_comparison.cc;
+- digit `make check_main` to run main_BST.cc;
+- digit `make integer` to run Integer_Lookup_comparison.cc (here inside you have to change dimensions of the trees if needed to test the plots with different inputs);
+- digit `make string` to run String_Lookup_comparison.cc (here inside you have to change dimensions of the trees if needed to test the plots with different inputs);
+- digit `make clean` to remove all .o and executable files;
+- digit `make plot` to plot times behaviours (this target just plots by the use of matplotlib the vectors previously saved in integer and string. In fact it takes time to evaluate times for very big trees). Two new png files will be saved on the main directory.
 
 
 
