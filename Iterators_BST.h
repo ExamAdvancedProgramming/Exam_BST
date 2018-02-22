@@ -1,6 +1,7 @@
 #ifndef ITERATORSBST
 #define ITERATORSBST
 
+
 template < typename key_type, typename value_type>
 
 class BST<key_type, value_type>::Iterator {
@@ -11,7 +12,7 @@ class BST<key_type, value_type>::Iterator {
     public:
     	Node* current; //needed public for operator[]
         Iterator(Node* n) : current{n} {};
-        std::pair<key_type, value_type> operator*() const { return std::make_pair(current -> key, current -> value); }
+        std::pair<key_type&, value_type&> operator*() const { return {current -> key, current -> value}; }
 
          // ++iterator definition
   
@@ -45,7 +46,10 @@ class BST<key_type,value_type> ::ConstIterator : public BST<key_type,value_type>
         using parent = BST<key_type,value_type> ::Iterator;
 
      public:
-        using parent::Iterator;
+       using parent::Iterator;
+       const std::pair<const key_type&, const value_type&> operator*() const { 
+       return {this -> current -> key, this -> current -> value}; }
+       
     };
     
 #endif

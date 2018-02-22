@@ -42,7 +42,14 @@ int main() {
 
     auto find1 = Tree.better_find(16);
     auto find2 = Tree.better_find(30);
+    
+    (*find2).second = 299;
+    std::cout << (*find2).second << std::endl;
+    auto prova = Tree.cbegin();
+    (*prova).second = 299;
     std::cout << "Found the keys " << (*find1).first << " and " << (*find2).first << std::endl; 
+     std::cout << "Found PROVA " << (*prova).first << " and " << (*prova).second << std::endl; 
+    
     Tree.better_find(55);
   
     Tree.last(); // expected last key:30  and last value:29
