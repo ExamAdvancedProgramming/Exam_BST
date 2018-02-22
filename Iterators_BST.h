@@ -2,11 +2,11 @@
 #define ITERATORSBST
 
 
-template < typename key_type, typename value_type>
+template < typename key_type, typename value_type, class Compare>
 
-class BST<key_type, value_type>::Iterator {
+class BST<key_type, value_type, Compare>::Iterator {
     private:
-        using Node = BST<key_type, value_type>::Node;
+        using Node = BST<key_type, value_type, Compare>::Node;
         
         
     public:
@@ -40,10 +40,10 @@ class BST<key_type, value_type>::Iterator {
 
 };
 
-template < typename key_type, typename value_type>
-class BST<key_type,value_type> ::ConstIterator : public BST<key_type,value_type> ::Iterator {
+template < typename key_type, typename value_type, class Compare>
+class BST<key_type,value_type, Compare> ::ConstIterator : public BST<key_type,value_type, Compare> ::Iterator {
      
-        using parent = BST<key_type,value_type> ::Iterator;
+        using parent = BST<key_type,value_type, Compare> ::Iterator;
 
      public:
        using parent::Iterator;

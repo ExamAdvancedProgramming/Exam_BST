@@ -1,9 +1,12 @@
 #ifndef FUNCTIONSBST
 #define FUNCTIONSBST
 
-template < typename key_type, typename value_type>
-void BST<key_type,value_type>::insert(const key_type k, const value_type v){
-    
+
+template < typename key_type, typename value_type, class Compare>
+void BST<key_type,value_type, Compare>::insert(const key_type k, const value_type v){
+    Compare comp_func;
+    typename Compare::Compare_struct compare_struct ;
+        
     Node* temp {nullptr};
     if (root == nullptr){
         root.reset(new Node{k,v});
@@ -13,22 +16,26 @@ void BST<key_type,value_type>::insert(const key_type k, const value_type v){
     else {
         Node* next = root.get(); 
         while(next){
-            if(k < next -> key){
-                temp = next; 
-                next = next -> left.get();
-                }
-            else if (k > next -> key){
-                temp = next;
-                next = next -> right.get();
-                }
-            else {
+            bool comp = comp_func.compare(k,next -> key);
+            
+            if(k == next -> key){
                 std::cout << "Node " << next -> key << " already exists"<< std::endl;
                
                 return;
                 }
+            
+            else if(comp){
+                temp = next; 
+                next = next -> left.get();
+                }
+            else if (!comp){
+                temp = next;
+                next = next -> right.get();
+                }
             }
         }
-    if (k < temp -> key){
+    bool comp = compare_struct(k,temp -> key);            
+    if (comp){
         temp -> left.reset(new Node{k,v, temp});
         std::cout << "New left node key " << temp -> left -> key << std::endl;
         }
@@ -41,11 +48,11 @@ void BST<key_type,value_type>::insert(const key_type k, const value_type v){
     
     
 
-template <typename key_type, typename value_type>
+template <typename key_type, typename value_type, class Compare>
 
 //the functions prints [key:value] from the smallest key to the largest one
 
-void BST<key_type, value_type>::print() const {
+void BST<key_type, value_type, Compare>::print() const {
     
     if (!root){
         std::cout << "The Tree is empty!" << std::endl; 
@@ -65,8 +72,8 @@ void BST<key_type, value_type>::print() const {
 
 
  
-template <typename key_type, typename value_type>
-void BST<key_type, value_type>::clear() {
+template <typename key_type, typename value_type, class Compare>
+void BST<key_type, value_type, Compare>::clear() {
     
     if(root){
        
@@ -78,11 +85,11 @@ void BST<key_type, value_type>::clear() {
 
 
 
-template < typename key_type, typename value_type>
+template < typename key_type, typename value_type, class Compare>
 
 //ricursive function in order to balance the tree (called by better_balance())
 
-void BST<key_type,value_type>::Better_BalancedTree(int b1, int e1, int b2, int e2, const std::vector<std::pair<key_type, value_type>> &array){
+void BST<key_type,value_type, Compare>::Better_BalancedTree(int b1, int e1, int b2, int e2, const std::vector<std::pair<key_type, value_type>> &array){
     
     if (b1 <= e1){
     
@@ -104,10 +111,10 @@ void BST<key_type,value_type>::Better_BalancedTree(int b1, int e1, int b2, int e
 }
 
 
-template < typename key_type, typename value_type>
+template < typename key_type, typename value_type, class Compare>
 
 //  NON-RICURSIVE function that balance the tree (called by balance)
-void BST<key_type,value_type>::BalancedTree(std::vector<std::pair<key_type, value_type>> array,int dim){
+void BST<key_type,value_type, Compare>::BalancedTree(std::vector<std::pair<key_type, value_type>> array,int dim){
     
     int mid {0};
     std::vector<int> indicator {};
@@ -159,8 +166,8 @@ void BST<key_type,value_type>::BalancedTree(std::vector<std::pair<key_type, valu
 
 
 
-template < typename key_type, typename value_type>
-void BST<key_type,value_type>::balance(){
+template < typename key_type, typename value_type, class Compare>
+void BST<key_type,value_type, Compare>::balance(){
     std::vector<std::pair<key_type, value_type>> arr {};
     auto it {this->cbegin()};
     auto it_end{this->cend()};
@@ -179,8 +186,8 @@ void BST<key_type,value_type>::balance(){
     }   
     
     
-template < typename key_type, typename value_type>
-void BST<key_type,value_type>::better_balance(){
+template < typename key_type, typename value_type, class Compare>
+void BST<key_type,value_type, Compare>::better_balance(){
     std::vector<std::pair<key_type, value_type>> arr {};
     auto it {this->cbegin()};
     auto it_end{this->cend()};

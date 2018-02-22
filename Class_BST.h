@@ -2,7 +2,46 @@
 #define CLASSBST
 #include<memory>
 
-template < typename key_type, typename value_type>
+
+//class to compare
+
+
+template < typename key_type >
+class Greater
+    {
+        public:
+
+            struct Compare_struct{
+                bool operator()(const key_type& k1, const key_type& k2){
+                return k1 > k2;
+                }
+            };
+
+            bool compare ( const key_type& k1, const key_type& k2){return k1 > k2;}
+};
+
+
+template < typename key_type >
+class Minor
+    {
+        public:
+
+            struct Compare_struct{
+                bool operator()(const key_type& k1, const key_type& k2){
+                return k1 < k2;
+                }
+            };
+
+            bool compare ( const key_type& k1, const key_type& k2){return k1 < k2;}
+};
+
+
+
+
+
+
+
+template < typename key_type, typename value_type, class Compare>
 class BST {
   
     private:
@@ -28,6 +67,7 @@ class BST {
   
   
     public:
+    
         BST() : root{nullptr} {};
         ~ BST (){}
         void insert (const key_type  k, const value_type  v);
@@ -67,14 +107,14 @@ class BST {
     
         // Move-Constructor
     
-        BST( BST<key_type, value_type>&& other) {
+        BST( BST<key_type, value_type, Compare>&& other) {
             root = std::move(other.root);
             other.root.reset();
        }
     
         //Copy-Assignment
     
-        BST& operator=(const BST<key_type, value_type>& other){
+        BST& operator=(const BST<key_type, value_type, Compare>& other){
 
         if (this == &other) {
             return *this; 
@@ -94,7 +134,7 @@ class BST {
     
     
         // Move - Assignment
-        BST& operator=(BST<key_type, value_type>&& other){
+        BST& operator=(BST<key_type, value_type, Compare>&& other){
             if (root != nullptr){
                 root.reset();
             }
@@ -124,7 +164,8 @@ class BST {
         	}
         }
         
-        
+        Compare comp_func;
+        typename Compare::Compare_struct compare_struct ;
         // it finds a key from the root  
         Iterator better_find(const key_type k){
             Node* next = root.get(); 
@@ -133,12 +174,13 @@ class BST {
                     return Iterator{nullptr}; 
                 }
                 else {
-        
+                    
                     while(next != nullptr && k != next -> key){
-                        if(k < next -> key){
+                        bool comp = compare_struct(k, next -> key); 
+                        if(comp){
                             next = next -> left.get();
                         }
-                        else if (k > next -> key){
+                        else if (!comp){
                             next = next -> right.get();
                             }   
                         }
@@ -215,7 +257,6 @@ class BST {
                 }
        
 };
-
 
 #endif
 
